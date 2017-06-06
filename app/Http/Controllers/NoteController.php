@@ -35,14 +35,21 @@ class NoteController extends Controller
         $note = new Note();
         $note = $note->create($createValues);
 
-        return $note;
+        return $note->id;
     }
 
     public function updateNote(Request $request, $id)
     {
-        $note = new Note();
-        $note = $note->findOrFail($id);
+        $content = json_decode($request->getContent());
 
-        return $note;
+        $updateValues = [
+            'title' => $content->title,
+            'note' => $content->note,
+            'user_id' => 0,
+        ];
+
+        $note = new Note();
+        $note = $note->find($id);
+        $note->update($updateValues);
     }
 }

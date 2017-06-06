@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/notes', 'NoteController@getAllNotes');
-Route::get('/note/{id}', 'NoteController@getNote');
-Route::post('/note/create', 'NoteController@createNote');
-Route::post('/note/update/{id}', 'NoteController@updateNote');
+Route::get('/notes', 'NoteController@getAllNotes')->middleware(\App\Http\Middleware\Cors::class);
+Route::get('/note/{id}', 'NoteController@getNote')->middleware(\App\Http\Middleware\Cors::class);
+Route::post('/note/create', 'NoteController@createNote')->middleware(\App\Http\Middleware\Cors::class);
+Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(\App\Http\Middleware\Cors::class);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
