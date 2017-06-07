@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Note;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class NoteTest extends TestCase
 {
@@ -23,7 +24,48 @@ class NoteTest extends TestCase
 
     public function testGetAllNotes()
     {
-        $response = $this->get('api/notes');
+        $data1 = '{"title":"This is my first note","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data1);
+        $id1 = $createResponse->getContent();
+
+        $data2 = '{"title":"This is my second note","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data2);
+        $id2 = $createResponse->getContent();
+
+        $dataDecoded1 = json_decode($data1);
+        $dataDecoded2 = json_decode($data2);
+
+        $getResponse = $this->get('api/notes');
+        $actual = json_decode($getResponse->getContent(), true);
+
+        unset($actual[0]['created_at']);
+        unset($actual[0]['updated_at']);
+
+        unset($actual[1]['created_at']);
+        unset($actual[1]['updated_at']);
+
+        $results = [
+            0 => ['id' => $id1,
+                  'title' => $dataDecoded1->title,
+                  'note' => $dataDecoded1->note,
+                  'user_id' => 0,
+                 ],
+            1 => ['id' => $id2,
+                  'title' => $dataDecoded2->title,
+                  'note' => $dataDecoded2->note,
+                  'user_id' => 0,
+                ],
+        ];
+
+        $this->assertEquals($results, $actual);
+
+        $note = Note::find($id1);
+        $note->delete();
+
+        $note = Note::find($id2);
+        $note->delete();
     }
 
     public function testGetNote()
@@ -49,13 +91,17 @@ class NoteTest extends TestCase
         unset($actual['updated_at']);
 
         $this->assertEquals($results, $actual);
+
+        $note = Note::find($id);
+        $note->delete();
     }
 
     public function testCreateNote()
     {
         $data = '{"title":"HELLO THIS IS MY NOTE","note":"Here is some text to put in my note","user_id":0}';
 
-        $this->call('post', 'api/note/create', [], [], [], [], $data);
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data);
+        $id = $createResponse->getContent();
 
         $dataDecoded = json_decode($data);
 
@@ -66,6 +112,9 @@ class NoteTest extends TestCase
         ];
 
         $this->assertDatabaseHas('notes', $results, 'mysql');
+
+        $note = Note::find($id);
+        $note->delete();
     }
 
     public function testCreateNoteReturnsId()
@@ -85,6 +134,9 @@ class NoteTest extends TestCase
         ];
 
         $this->assertDatabaseHas('notes', $results, 'mysql');
+
+        $note = Note::find($id);
+        $note->delete();
     }
 
     public function testUpdateNote()
@@ -105,5 +157,24 @@ class NoteTest extends TestCase
         ];
 
         $this->assertDatabaseHas('notes', $results, 'mysql');
+
+        $note = Note::find($id);
+        $note->delete();
+    }
+
+    public function testDeleteNote()
+    {
+        $data = '{"title":"HELLO THIS IS MY NOTE","note":"Here is some text to put in my note","user_id":0}';
+
+        $response = $this->call('post', 'api/note/create', [], [], [], [], $data);
+        $id = $response->getContent();
+
+        $this->call('post', 'api/note/delete/' . $id, [], [], [], [], $data);
+
+        $results = [
+            'id' => $id,
+        ];
+
+        $this->assertDatabaseMissing('notes', $results, 'mysql');
     }
 }

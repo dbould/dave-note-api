@@ -17,6 +17,7 @@ Route::get('/notes', 'NoteController@getAllNotes')->middleware(\App\Http\Middlew
 Route::get('/note/{id}', 'NoteController@getNote')->middleware(\App\Http\Middleware\Cors::class);
 Route::post('/note/create', 'NoteController@createNote')->middleware(\App\Http\Middleware\Cors::class);
 Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(\App\Http\Middleware\Cors::class);
+Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(\App\Http\Middleware\Cors::class);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

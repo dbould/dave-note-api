@@ -16,8 +16,7 @@ class NoteController extends Controller
 
     public function getNote(Request $request, $id)
     {
-        $note = new Note();
-        $note = $note->findOrFail($id);
+        $note = Note::findOrFail($id);
 
         return $note;
     }
@@ -32,8 +31,8 @@ class NoteController extends Controller
             'user_id' => 0,
         ];
 
-        $note = new Note();
-        $note = $note->create($createValues);
+
+        $note = Note::create($createValues);
 
         return $note->id;
     }
@@ -48,8 +47,13 @@ class NoteController extends Controller
             'user_id' => 0,
         ];
 
-        $note = new Note();
-        $note = $note->find($id);
+        $note = Note::find($id);
         $note->update($updateValues);
+    }
+
+    public function deleteNote(Request $request, $id)
+    {
+        $note = Note::find($id);
+        $note->delete();
     }
 }
