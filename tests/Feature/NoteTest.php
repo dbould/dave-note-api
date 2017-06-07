@@ -28,7 +28,27 @@ class NoteTest extends TestCase
 
     public function testGetNote()
     {
-        $response = $this->get('api/note/1');
+        $data = '{"title":"HELLO THIS IS MY NOTE","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data);
+        $id = $createResponse->getContent();
+
+        $dataDecoded = json_decode($data);
+
+        $results = [
+            'id' => $id,
+            'title' => $dataDecoded->title,
+            'note' => $dataDecoded->note,
+            'user_id' => 0,
+        ];
+
+        $getResponse = $this->get('api/note/' . $id);
+        $actual = json_decode($getResponse->getContent(), true);
+
+        unset($actual['created_at']);
+        unset($actual['updated_at']);
+
+        $this->assertEquals($results, $actual);
     }
 
     public function testCreateNote()
