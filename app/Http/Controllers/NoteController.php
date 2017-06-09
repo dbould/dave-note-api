@@ -9,14 +9,14 @@ class NoteController extends Controller
 {
     public function getAllNotes(Request $request)
     {
-        $notes = Note::All();
+        $notes = Note::where('is_deleted', '=', '0')->get();
 
         return $notes;
     }
 
     public function getNote(Request $request, $id)
     {
-        $note = Note::findOrFail($id);
+        $note = Note::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
 
         return $note;
     }
@@ -29,6 +29,7 @@ class NoteController extends Controller
             'title' => $content->title,
             'note' => $content->note,
             'user_id' => 0,
+            'is_deleted' => 0,
         ];
 
 
@@ -54,6 +55,7 @@ class NoteController extends Controller
     public function deleteNote(Request $request, $id)
     {
         $note = Note::find($id);
-        $note->delete();
+        $note->is_deleted = 1;
+        $note->save();
     }
 }

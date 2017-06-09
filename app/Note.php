@@ -10,5 +10,10 @@ class Note extends Model
         'title',
         'note',
         'user_id',
+        'is_deleted',
+    ];
+
+    protected $hidden = [
+        'is_deleted'
     ];
 }

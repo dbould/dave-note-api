@@ -46,7 +46,7 @@ class NoteTest extends TestCase
         unset($actual[1]['created_at']);
         unset($actual[1]['updated_at']);
 
-        $results = [
+        $expected = [
             0 => ['id' => $id1,
                   'title' => $dataDecoded1->title,
                   'note' => $dataDecoded1->note,
@@ -59,7 +59,36 @@ class NoteTest extends TestCase
                 ],
         ];
 
-        $this->assertEquals($results, $actual);
+        $this->assertEquals($expected, $actual);
+
+        $note = Note::find($id1);
+        $note->delete();
+
+        $note = Note::find($id2);
+        $note->delete();
+    }
+
+    public function testCantFindDeletedNotes()
+    {
+        $data1 = '{"title":"This is my first note","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data1);
+        $id1 = $createResponse->getContent();
+
+        $data2 = '{"title":"This is my second note","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data2);
+        $id2 = $createResponse->getContent();
+
+        $this->call('post', 'api/note/delete/' . $id1);
+        $this->call('post', 'api/note/delete/' . $id2);
+
+        $getResponse = $this->get('api/notes');
+        $actual = json_decode($getResponse->getContent(), true);
+
+        $expected = [];
+
+        $this->assertEquals($expected, $actual);
 
         $note = Note::find($id1);
         $note->delete();
@@ -77,7 +106,7 @@ class NoteTest extends TestCase
 
         $dataDecoded = json_decode($data);
 
-        $results = [
+        $expected = [
             'id' => $id,
             'title' => $dataDecoded->title,
             'note' => $dataDecoded->note,
@@ -90,7 +119,30 @@ class NoteTest extends TestCase
         unset($actual['created_at']);
         unset($actual['updated_at']);
 
-        $this->assertEquals($results, $actual);
+        $this->assertEquals($expected, $actual);
+
+        $note = Note::find($id);
+        $note->delete();
+    }
+
+    public function testCantFindDeletedNote()
+    {
+        $data = '{"title":"HELLO THIS IS MY NOTE","note":"Here is some text to put in my note","user_id":0}';
+
+        $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data);
+        $id = $createResponse->getContent();
+
+        $this->call('post', 'api/note/delete/' . $id);
+
+        $expected = null;
+
+        $getResponse = $this->get('api/note/' . $id);
+        $actual = json_decode($getResponse->getContent(), true);
+
+        unset($actual['created_at']);
+        unset($actual['updated_at']);
+
+        $this->assertEquals($expected, $actual);
 
         $note = Note::find($id);
         $note->delete();
@@ -169,12 +221,16 @@ class NoteTest extends TestCase
         $response = $this->call('post', 'api/note/create', [], [], [], [], $data);
         $id = $response->getContent();
 
-        $this->call('post', 'api/note/delete/' . $id, [], [], [], [], $data);
+        $this->call('post', 'api/note/delete/' . $id);
 
         $results = [
             'id' => $id,
+            'is_deleted' => 1,
         ];
 
-        $this->assertDatabaseMissing('notes', $results, 'mysql');
+        $this->assertDatabaseHas('notes', $results, 'mysql');
+
+        $note = Note::find($id);
+        $note->delete();
     }
 }

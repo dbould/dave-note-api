@@ -19,6 +19,7 @@ class CreateNotesTable extends Migration
             $table->longText('note');
             $table->integer('user_id');
             $table->timestamps();
+            $table->tinyInteger('is_deleted');
         });
     }
 
