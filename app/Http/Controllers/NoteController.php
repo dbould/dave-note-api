@@ -9,9 +9,16 @@ class NoteController extends Controller
 {
     public function getAllNotes(Request $request)
     {
-        $notes = Note::where('is_deleted', '=', '0')->get();
+        $notes = Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get();
 
         return $notes;
+    }
+
+    public function getLatestUpdatedNote()
+    {
+        $note = Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->firstOrFail();
+
+        return $note;
     }
 
     public function getNote(Request $request, $id)

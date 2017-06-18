@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/notes', 'NoteController@getAllNotes')->middleware(\App\Http\Middleware\Cors::class);
+Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware(\App\Http\Middleware\Cors::class);
 Route::get('/note/{id}', 'NoteController@getNote')->middleware(\App\Http\Middleware\Cors::class);
 Route::post('/note/create', 'NoteController@createNote')->middleware(\App\Http\Middleware\Cors::class);
 Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(\App\Http\Middleware\Cors::class);
