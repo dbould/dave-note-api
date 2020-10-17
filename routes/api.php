@@ -13,13 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/notes', 'NoteController@getAllNotes')->middleware(\App\Http\Middleware\Cors::class);
-Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware(\App\Http\Middleware\Cors::class);
-Route::get('/note/{id}', 'NoteController@getNote')->middleware(\App\Http\Middleware\Cors::class);
-Route::post('/note/create', 'NoteController@createNote')->middleware(\App\Http\Middleware\Cors::class);
-Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(\App\Http\Middleware\Cors::class);
-Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(\App\Http\Middleware\Cors::class);
+Route::get('/notes', 'NoteController@getAllNotes')->middleware('cors');
+Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware('cors');
+Route::get('/note/{id}', 'NoteController@getNote')->middleware('cors');
+Route::post('/note/create', 'NoteController@createNote')->middleware('cors');
+Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware('cors');
+Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware('cors');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user', 'UserController')->middleware('auth:api');
