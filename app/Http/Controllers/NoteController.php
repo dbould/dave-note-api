@@ -7,25 +7,19 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    public function getAllNotes(Request $request)
+    public function getAllNotes()
     {
-        $notes = Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get();
-
-        return $notes;
+        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get();
     }
 
     public function getLatestUpdatedNote()
     {
-        $note = Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->firstOrFail();
-
-        return $note;
+        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->firstOrFail();
     }
 
-    public function getNote(Request $request, $id)
+    public function getNote($id)
     {
-        $note = Note::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
-
-        return $note;
+        return Note::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
     }
 
     public function createNote(Request $request)
@@ -59,7 +53,7 @@ class NoteController extends Controller
         $note->update($updateValues);
     }
 
-    public function deleteNote(Request $request, $id)
+    public function deleteNote($id)
     {
         $note = Note::find($id);
         $note->is_deleted = 1;
