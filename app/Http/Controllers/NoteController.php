@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
+    public function test()
+    {
+        die('CLUCK');
+        return 'mooooo';
+    }
+
     public function getAllNotes(Request $request)
     {
         $notes = Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get();
