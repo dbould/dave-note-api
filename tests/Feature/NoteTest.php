@@ -24,6 +24,8 @@ class NoteTest extends TestCase
 
     public function testGetAllNotes()
     {
+        Note::truncate();
+
         $data1 = '{"title":"This is my first note","note":"Here is some text to put in my note","user_id":0}';
 
         $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data1);
@@ -70,6 +72,8 @@ class NoteTest extends TestCase
 
     public function testCantFindDeletedNotes()
     {
+        Note::truncate();
+
         $data1 = '{"title":"This is my first note","note":"Here is some text to put in my note","user_id":0}';
 
         $createResponse = $this->call('post', 'api/note/create', [], [], [], [], $data1);

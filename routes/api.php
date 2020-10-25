@@ -1,5 +1,6 @@
 <?php
 
+use Fruitcake\Cors\HandleCors;
 use Illuminate\Http\Request;
 
 /*
@@ -12,12 +13,12 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/notes', 'NoteController@getAllNotes')->middleware(\Fruitcake\Cors\HandleCors::class);
-Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware(\Fruitcake\Cors\HandleCors::class);
-Route::get('/note/{id}', 'NoteController@getNote')->middleware(\Fruitcake\Cors\HandleCors::class);
-Route::post('/note/create', 'NoteController@createNote')->middleware(\Fruitcake\Cors\HandleCors::class);
-Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(\Fruitcake\Cors\HandleCors::class);
-Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(\Fruitcake\Cors\HandleCors::class);
+Route::get('/notes', 'NoteController@getAllNotes')->middleware(HandleCors::class);
+Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware(HandleCors::class);
+Route::get('/note/{id}', 'NoteController@getNote')->middleware(HandleCors::class);
+Route::post('/note/create', 'NoteController@createNote')->middleware(HandleCors::class);
+Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(HandleCors::class);
+Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(HandleCors::class);
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
