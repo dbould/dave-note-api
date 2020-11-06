@@ -20,6 +20,6 @@ Route::post('/note/create', 'NoteController@createNote')->middleware(HandleCors:
 Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(HandleCors::class);
 Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(HandleCors::class);
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
