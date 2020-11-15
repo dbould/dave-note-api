@@ -93,7 +93,20 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var e=__webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");function t(){return(t=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}var r={functional:!0,props:{data:{type:Object,default:function(){return{}}},href:{type:String,required:!0},method:{type:String,default:"get"},replace:{type:Boolean,default:!1},preserveScroll:{type:Boolean,default:!1},preserveState:{type:Boolean,default:!1},only:{type:Array,default:function(){return[]}},headers:{type:Object,default:function(){return{}}}},render:function(r,n){var o=n.props,i=n.data,a=n.children;return r("a",t({},i,{attrs:t({},i.attrs,{href:o.href}),on:t({},i.on||{},{click:function(t){i.on&&i.on.click&&i.on.click(t),e.shouldIntercept(t)&&(t.preventDefault(),e.Inertia.visit(o.href,{data:o.data,method:o.method,replace:o.replace,preserveScroll:o.preserveScroll,preserveState:o.preserveState,only:o.only,headers:o.headers}))}})}),a)}},n={created:function(){var r=this;if(this.$options.remember){Array.isArray(this.$options.remember)&&(this.$options.remember={data:this.$options.remember}),"string"==typeof this.$options.remember&&(this.$options.remember={data:[this.$options.remember]}),"string"==typeof this.$options.remember.data&&(this.$options.remember={data:[this.$options.remember.data]});var n=this.$options.remember.key instanceof Function?this.$options.remember.key():this.$options.remember.key,o=e.Inertia.restore(n);this.$options.remember.data.forEach(function(i){void 0!==o&&void 0!==o[i]&&(r[i]=o[i]),r.$watch(i,function(){e.Inertia.remember(r.$options.remember.data.reduce(function(e,n){var o;return t({},e,((o={})[n]=r[n],o))},{}),n)},{immediate:!0,deep:!0})})}}},o={};exports.InertiaApp={name:"Inertia",props:{initialPage:{type:Object,required:!0},resolveComponent:{type:Function,required:!0},transformProps:{type:Function,default:function(e){return e}}},data:function(){return{component:null,props:{},key:null}},created:function(){var t=this;o=this,e.Inertia.init({initialPage:this.initialPage,resolveComponent:this.resolveComponent,updatePage:function(e,r,n){var o=n.preserveState;try{return t.component=e,t.props=t.transformProps(r),t.key=o?t.key:Date.now(),Promise.resolve()}catch(e){return Promise.reject(e)}}})},render:function(e){if(this.component){var t=e(this.component,{key:this.key,props:this.props,scopedSlots:this.$scopedSlots});return this.component.layout?"function"==typeof this.component.layout?this.component.layout(e,t):Array.isArray(this.component.layout)?this.component.layout.concat(t).reverse().reduce(function(t,r){return e(r,[t])}):e(this.component.layout,[t]):t}},install:function(t){Object.defineProperty(t.prototype,"$inertia",{get:function(){return e.Inertia}}),Object.defineProperty(t.prototype,"$page",{get:function(){return o.props}}),t.mixin(n),t.component("InertiaLink",r)}},exports.InertiaLink=r;
+var e=__webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");function t(){return(t=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var n={functional:!0,props:{as:{type:String,default:"a"},data:{type:Object,default:function(){return{}}},href:{type:String,required:!0},method:{type:String,default:"get"},replace:{type:Boolean,default:!1},preserveScroll:{type:Boolean,default:!1},preserveState:{type:Boolean,default:null},only:{type:Array,default:function(){return[]}},headers:{type:Object,default:function(){return{}}}},render:function(n,r){var o=r.props,i=r.data,a=r.children;i.on=t({click:function(){return{}},cancelToken:function(){return{}},start:function(){return{}},progress:function(){return{}},finish:function(){return{}},cancel:function(){return{}},success:function(){return{}}},i.on||{});var s=o.as.toLowerCase(),p=o.method.toLowerCase(),c=e.mergeDataIntoQueryString(p,e.hrefToUrl(o.href),o.data),u=c[0],l=c[1];return"a"===s&&"get"!==p&&console.warn('Creating POST/PUT/PATCH/DELETE <a> links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues.\n\nPlease specify a more appropriate element using the "as" attribute. For example:\n\n<inertia-link href="'+u.href+'" method="'+p+'" as="button">...</inertia-link>'),n(o.as,t({},i,{attrs:t({},i.attrs,"a"===s?{href:u.href}:{}),on:t({},i.on,{click:function(t){var n;i.on.click(t),e.shouldIntercept(t)&&(t.preventDefault(),e.Inertia.visit(u.href,{data:l,method:p,replace:o.replace,preserveScroll:o.preserveScroll,preserveState:null!=(n=o.preserveState)?n:"get"!==p,only:o.only,headers:o.headers,onCancelToken:i.on.cancelToken,onBefore:i.on.before,onStart:i.on.start,onProgress:i.on.progress,onFinish:i.on.finish,onCancel:i.on.cancel,onSuccess:i.on.success}))}})}),a)}},r={created:function(){var n=this;if(this.$options.remember){Array.isArray(this.$options.remember)&&(this.$options.remember={data:this.$options.remember}),"string"==typeof this.$options.remember&&(this.$options.remember={data:[this.$options.remember]}),"string"==typeof this.$options.remember.data&&(this.$options.remember={data:[this.$options.remember.data]});var r=this.$options.remember.key instanceof Function?this.$options.remember.key.call(this):this.$options.remember.key,o=e.Inertia.restore(r);this.$options.remember.data.forEach(function(i){void 0!==o&&void 0!==o[i]&&(n[i]=o[i]),n.$watch(i,function(){e.Inertia.remember(n.$options.remember.data.reduce(function(e,r){var o;return t({},e,((o={})[r]=n[r],o))},{}),r)},{immediate:!0,deep:!0})})}}},o={},i={name:"Inertia",props:{initialPage:{type:Object,required:!0},resolveComponent:{type:Function,required:!0},transformProps:{type:Function,default:function(e){return e}}},data:function(){return{component:null,page:{},key:null}},created:function(){var t=this;o=this,e.Inertia.init({initialPage:this.initialPage,resolveComponent:this.resolveComponent,transformProps:this.transformProps,swapComponent:function(e){var n=e.component,r=e.page,o=e.preserveState;try{return t.component=n,t.page=r,t.key=o?t.key:Date.now(),Promise.resolve()}catch(e){return Promise.reject(e)}}})},render:function(e){if(this.component){var t=e(this.component,{key:this.key,props:this.page.props,scopedSlots:this.$scopedSlots});return this.component.layout?"function"==typeof this.component.layout?this.component.layout(e,t):Array.isArray(this.component.layout)?this.component.layout.concat(t).reverse().reduce(function(t,n){return e(n,[t])}):e(this.component.layout,[t]):t}},install:function(e){console.warn('Registering the Inertia Vue plugin via the "app" component has been deprecated. Use the new "plugin" named export instead.\n\nimport { plugin } from \'@inertiajs/inertia-vue\'\n\nVue.use(plugin)'),a.install(e)}},a={install:function(t){Object.defineProperty(t.prototype,"$inertia",{get:function(){return e.Inertia}}),Object.defineProperty(t.prototype,"$page",{get:function(){return o.page}}),t.mixin(r),t.component("InertiaLink",n)}};exports.App=i,exports.InertiaApp=i,exports.InertiaLink=n,exports.Link=n,exports.app=i,exports.link=n,exports.plugin=a;
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@inertiajs/inertia-vue3/dist/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@inertiajs/inertia-vue3/dist/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var e=__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"),t=__webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");function r(){return(r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}var n={props:{as:{type:String,default:"a"},data:{type:Object,default:function(){return{}}},href:{type:String,required:!0},method:{type:String,default:"get"},replace:{type:Boolean,default:!1},preserveScroll:{type:Boolean,default:!1},preserveState:{type:Boolean,default:null},only:{type:Array,default:function(){return[]}},headers:{type:Object,default:function(){return{}}}},setup:function(n,o){var a=o.slots,i=o.attrs;return function(n){var o=n.as.toLowerCase(),u=n.method.toLowerCase(),s=t.mergeDataIntoQueryString(u,t.hrefToUrl(n.href),n.data),p=s[0],l=s[1];return"a"===o&&"get"!==u&&console.warn('Creating POST/PUT/PATCH/DELETE <a> links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues.\n\nPlease specify a more appropriate element using the "as" attribute. For example:\n\n<inertia-link href="'+p.href+'" method="'+u+'" as="button">...</inertia-link>'),e.h(n.as,r({},i,"a"===o?{href:p.href}:{},{onClick:function(e){var r;t.shouldIntercept(e)&&(e.preventDefault(),t.Inertia.visit(p.href,{data:l,method:u,replace:n.replace,preserveScroll:n.preserveScroll,preserveState:null!=(r=n.preserveState)?r:"get"!==u,only:n.only,headers:n.headers,onCancelToken:i.onCancelToken||function(){return{}},onBefore:i.onBefore||function(){return{}},onStart:i.onStart||function(){return{}},onProgress:i.onProgress||function(){return{}},onFinish:i.onFinish||function(){return{}},onCancel:i.onCancel||function(){return{}},onSuccess:i.onSuccess||function(){return{}}}))}}),a.default())}}},o={created:function(){var e=this;if(this.$options.remember){Array.isArray(this.$options.remember)&&(this.$options.remember={data:this.$options.remember}),"string"==typeof this.$options.remember&&(this.$options.remember={data:[this.$options.remember]}),"string"==typeof this.$options.remember.data&&(this.$options.remember={data:[this.$options.remember.data]});var n=this.$options.remember.key instanceof Function?this.$options.remember.key.call(this):this.$options.remember.key,o=t.Inertia.restore(n);this.$options.remember.data.forEach(function(a){void 0!==o&&void 0!==o[a]&&(e[a]=o[a]),e.$watch(a,function(){t.Inertia.remember(e.$options.remember.data.reduce(function(t,n){var o;return r({},t,((o={})[n]=JSON.parse(JSON.stringify(e[n])),o))},{}),n)},{immediate:!0,deep:!0})})}}},a=e.ref(null),i=e.ref({}),u=e.ref(null),s={name:"Inertia",props:{initialPage:{type:Object,required:!0},resolveComponent:{type:Function,required:!0},transformProps:{type:Function,default:function(e){return e}}},setup:function(n){return t.Inertia.init({initialPage:n.initialPage,resolveComponent:n.resolveComponent,transformProps:n.transformProps,swapComponent:function(t){try{return a.value=e.markRaw(t.component),i.value=t.page,u.value=t.preserveState?u.value:Date.now(),Promise.resolve()}catch(e){return Promise.reject(e)}}}),function(){if(a.value){var t=e.h(a.value,r({},i.value.props,{key:u.value}));return a.value.layout?"function"==typeof a.value.layout?a.value.layout(e.h,t):Array.isArray(a.value.layout)?a.value.layout.concat(t).reverse().reduce(function(t,r){return e.h(r,[t])}):e.h(a.value.layout,function(){return t}):t}}}},p={install:function(e){Object.defineProperty(e.config.globalProperties,"$inertia",{get:function(){return t.Inertia}}),Object.defineProperty(e.config.globalProperties,"$page",{get:function(){return i.value}}),e.mixin(o),e.component("InertiaLink",n)}};exports.App=s,exports.Link=n,exports.app=s,exports.link=n,exports.plugin=p,exports.usePage=function(){return{props:e.computed(function(){return i.value.props}),url:e.computed(function(){return i.value.url}),component:e.computed(function(){return i.value.component}),version:e.computed(function(){return i.value.version})}};
 //# sourceMappingURL=index.js.map
 
 
@@ -106,7 +119,7 @@ var e=__webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/i
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var e,t=(e=__webpack_require__(/*! axios */ "./node_modules/axios/index.js"))&&"object"==typeof e&&"default"in e?e.default:e;function i(){return(i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var n in i)Object.prototype.hasOwnProperty.call(i,n)&&(e[n]=i[n])}return e}).apply(this,arguments)}var n={modal:null,listener:null,show:function(e){var t=this;"object"==typeof e&&(e="All Inertia.js requests must receive a valid Inertia.js response, however a return plain JSON response was received.<hr>"+JSON.stringify(e));var i=document.createElement("html");i.innerHTML=e,i.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var n=document.createElement("iframe");n.style.backgroundColor="white",n.style.borderRadius="5px",n.style.width="100%",n.style.height="100%",this.modal.appendChild(n),document.body.prepend(this.modal),document.body.style.overflow="hidden",n.contentWindow.document.open(),n.contentWindow.document.write(i.outerHTML),n.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};exports.Inertia={resolveComponent:null,updatePage:null,visitId:null,cancelToken:null,page:null,init:function(e){var t,i,n=e.initialPage,o=e.updatePage;this.resolveComponent=e.resolveComponent,this.updatePage=o,window.history.state&&"back_forward"===this.navigationType()?this.setPage(window.history.state):window.sessionStorage.getItem("inertia.hardVisit")?(window.sessionStorage.removeItem("inertia.hardVisit"),this.setPage(n,{preserveState:!0})):(n.url+=window.location.hash,this.setPage(n)),this.fireEvent("navigate",{detail:{page:n}}),window.addEventListener("popstate",this.restoreState.bind(this)),document.addEventListener("scroll",(t=this.handleScrollEvent.bind(this),i=null,function(){var e=arguments,n=this;clearTimeout(i),i=setTimeout(function(){return t.apply(n,e)},100)}),!0)},scrollRegions:function(){return document.querySelectorAll("[scroll-region]")},handleScrollEvent:function(e){"function"==typeof e.target.hasAttribute&&e.target.hasAttribute("scroll-region")&&this.saveScrollPositions()},saveScrollPositions:function(){this.replaceState(i({},window.history.state,{scrollRegions:Array.prototype.slice.call(this.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},resetScrollPositions:function(){document.documentElement.scrollTop=0,document.documentElement.scrollLeft=0,this.scrollRegions().forEach(function(e){e.scrollTop=0,e.scrollLeft=0})},restoreScrollPositions:function(e){e.scrollRegions&&this.scrollRegions().forEach(function(t,i){t.scrollTop=e.scrollRegions[i].top,t.scrollLeft=e.scrollRegions[i].left})},navigationType:function(){if(window.performance&&window.performance.getEntriesByType("navigation").length)return window.performance.getEntriesByType("navigation")[0].type},isInertiaResponse:function(e){return e&&e.headers["x-inertia"]},isHardVisit:function(e){return e&&409===e.status&&e.headers["x-inertia-location"]},fireEvent:function(e,t){return document.dispatchEvent(new CustomEvent("inertia:"+e,t))},cancelActiveVisits:function(){this.cancelToken&&this.cancelToken.cancel(),this.cancelToken=t.CancelToken.source()},createVisitId:function(){return this.visitId={},this.visitId},visit:function(e,o){var r=this,s=void 0===o?{}:o,a=s.method,c=void 0===a?"get":a,l=s.data,d=void 0===l?{}:l,u=s.replace,h=void 0!==u&&u,p=s.preserveScroll,v=void 0!==p&&p,f=s.preserveState,m=void 0!==f&&f,g=s.only,w=void 0===g?[]:g,y=s.headers,S=void 0===y?{}:y,E=s.onCancelToken,P=void 0===E?function(){return{}}:E,b=s.onStart,I=void 0===b?function(){return{}}:b,T=s.onProgress,k=void 0===T?function(){return{}}:T,C=s.onFinish,L=void 0===C?function(){return{}}:C,x=s.onCancel,R=void 0===x?function(){return{}}:x,V=s.onSuccess,j=void 0===V?function(){return{}}:V,A=i({url:e},arguments[1]);if(!1!==I(A)&&this.fireEvent("start",{cancelable:!0,detail:{visit:A}})){this.cancelActiveVisits(),this.saveScrollPositions();var O=this.createVisitId();return P(this.cancelToken),new Proxy(t({method:c,url:e.toString(),data:"get"===c.toLowerCase()?{}:d,params:"get"===c.toLowerCase()?d:{},cancelToken:this.cancelToken.token,headers:i({},S,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},w.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":w.join(",")}:{},this.page.version?{"X-Inertia-Version":this.page.version}:{}),onUploadProgress:function(e){e.percentage=Math.round(e.loaded/e.total*100),r.fireEvent("progress",{detail:{progress:e}}),k(e)}}).then(function(e){return r.isInertiaResponse(e)?(w.length&&(e.data.props=i({},r.page.props,e.data.props)),r.setPage(e.data,{visitId:O,replace:h,preserveScroll:v,preserveState:m})):Promise.reject({response:e})}).then(function(){return r.fireEvent("success",{detail:{page:r.page}}),j(r.page)}).catch(function(e){if(r.isInertiaResponse(e.response))return r.setPage(e.response.data,{visitId:O});if(t.isCancel(e))R();else if(r.isHardVisit(e.response))r.hardVisit(e.response.headers["x-inertia-location"]);else{if(!e.response)return Promise.reject(e);r.fireEvent("invalid",{cancelable:!0,detail:{response:e.response}})&&n.show(e.response.data)}}).catch(function(e){if(r.fireEvent("error",{cancelable:!0,detail:{error:e}}))return Promise.reject(e)}).finally(function(){r.fireEvent("finish"),L()}),{get:function(e,t){return console.warn("Inertia.js visit promises have been deprecated and will be removed in a future release. Please use the new visit event callbacks instead.\n\nLearn more at https://inertiajs.com/manual-visits#promise-deprecation"),e[t].bind(e)}})}},hardVisit:function(e){window.sessionStorage.setItem("inertia.hardVisit",!0),window.location.href=e},setPage:function(e,t){var i=this,n=void 0===t?{}:t,o=n.visitId,r=void 0===o?this.createVisitId():o,s=n.replace,a=void 0!==s&&s,c=n.preserveScroll,l=void 0!==c&&c,d=n.preserveState,u=void 0!==d&&d;return this.page=e,Promise.resolve(this.resolveComponent(e.component)).then(function(t){r===i.visitId&&(u="function"==typeof u?u(e):u,l="function"==typeof l?l(e):l,(a=a||e.url===""+window.location.pathname+window.location.search)?i.replaceState(e,u):i.pushState(e),i.updatePage(t,e.props,{preserveState:u}).then(function(){l||i.resetScrollPositions(),a||i.fireEvent("navigate",{detail:{page:e}})}))})},pushState:function(e){window.history.pushState(i({cache:{}},e),"",e.url)},replaceState:function(e,t){void 0===t&&(t=!1),window.history.replaceState(i({},{cache:t&&window.history.state?window.history.state.cache:{}},e),"",e.url)},restoreState:function(e){var t=this;if(e.state){this.page=e.state;var i=this.createVisitId();return Promise.resolve(this.resolveComponent(this.page.component)).then(function(e){i===t.visitId&&t.updatePage(e,t.page.props,{preserveState:!1}).then(function(){t.restoreScrollPositions(t.page),t.fireEvent("navigate",{detail:{page:t.page}})})})}},get:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({},n,{method:"get",data:t}))},replace:function(e,t){return void 0===t&&(t={}),this.visit(e,i({preserveState:!0},t,{replace:!0}))},reload:function(e){return void 0===e&&(e={}),this.replace(window.location.href,e)},post:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"post",data:t}))},put:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"put",data:t}))},patch:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"patch",data:t}))},delete:function(e,t){return void 0===t&&(t={}),this.visit(e,i({},t,{method:"delete"}))},remember:function(e,t){void 0===t&&(t="default");var n=i({},window.history.state);n.cache=n.cache||{},n.cache[t]=e,this.replaceState(n)},restore:function(e){if(void 0===e&&(e="default"),window.history.state.cache&&window.history.state.cache[e])return window.history.state.cache[e]},on:function(e,t){var i=function(e){var i=t(e);e.cancelable&&!e.defaultPrevented&&!1===i&&e.preventDefault()};return document.addEventListener("inertia:"+e,i),function(){document.removeEventListener("inertia:"+e,i)}}},exports.shouldIntercept=function(e){return!(e.target&&e.target.isContentEditable||e.defaultPrevented||e.which>1||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)};
+var e,t=(e=__webpack_require__(/*! axios */ "./node_modules/axios/index.js"))&&"object"==typeof e&&"default"in e?e.default:e;function i(){return(i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var n in i)Object.prototype.hasOwnProperty.call(i,n)&&(e[n]=i[n])}return e}).apply(this,arguments)}var n={modal:null,listener:null,show:function(e){var t=this;"object"==typeof e&&(e="All Inertia requests must receive a valid Inertia response, however a plain JSON response was received.<hr>"+JSON.stringify(e));var i=document.createElement("html");i.innerHTML=e,i.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var n=document.createElement("iframe");n.style.backgroundColor="white",n.style.borderRadius="5px",n.style.width="100%",n.style.height="100%",this.modal.appendChild(n),document.body.prepend(this.modal),document.body.style.overflow="hidden",n.contentWindow.document.open(),n.contentWindow.document.write(i.outerHTML),n.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};exports.Inertia={resolveComponent:null,swapComponent:null,transformProps:null,cancelToken:null,visitId:null,page:null,init:function(e){var t=e.initialPage,i=e.swapComponent,n=e.transformProps;this.resolveComponent=e.resolveComponent,this.swapComponent=i,this.transformProps=n,this.handleInitialPageVisit(t),this.setupEventListeners()},handleInitialPageVisit:function(e){this.isBackForwardVisit()?this.handleBackForwardVisit(e):this.isLocationVisit()?this.handleLocationVisit(e):(e.url+=window.location.hash,this.setPage(e)),this.fireEvent("navigate",{detail:{page:e}})},setupEventListeners:function(){var e,t;window.addEventListener("popstate",this.handlePopstateEvent.bind(this)),document.addEventListener("scroll",(e=this.handleScrollEvent.bind(this),t=null,function(){var i=arguments,n=this;clearTimeout(t),t=setTimeout(function(){return e.apply(n,i)},100)}),!0)},scrollRegions:function(){return document.querySelectorAll("[scroll-region]")},handleScrollEvent:function(e){"function"==typeof e.target.hasAttribute&&e.target.hasAttribute("scroll-region")&&this.saveScrollPositions()},saveScrollPositions:function(){this.replaceState(i({},this.page,{scrollRegions:Array.prototype.slice.call(this.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},resetScrollPositions:function(){var e;document.documentElement.scrollTop=0,document.documentElement.scrollLeft=0,this.scrollRegions().forEach(function(e){e.scrollTop=0,e.scrollLeft=0}),this.saveScrollPositions(),window.location.hash&&(null==(e=document.getElementById(window.location.hash.slice(1)))||e.scrollIntoView())},restoreScrollPositions:function(){var e=this;this.page.scrollRegions&&this.scrollRegions().forEach(function(t,i){t.scrollTop=e.page.scrollRegions[i].top,t.scrollLeft=e.page.scrollRegions[i].left})},isBackForwardVisit:function(){return window.history.state&&window.performance&&window.performance.getEntriesByType("navigation").length&&"back_forward"===window.performance.getEntriesByType("navigation")[0].type},handleBackForwardVisit:function(e){var t=this;window.history.state.version=e.version,this.setPage(window.history.state,{preserveScroll:!0}).then(function(){t.restoreScrollPositions()})},locationVisit:function(e,t){try{window.sessionStorage.setItem("inertiaLocationVisit",JSON.stringify({preserveScroll:t})),window.location.href=e.href,this.urlWithoutHash(window.location).href===this.urlWithoutHash(e).href&&window.location.reload()}catch(e){return!1}},isLocationVisit:function(){try{return null!==window.sessionStorage.getItem("inertiaLocationVisit")}catch(e){return!1}},handleLocationVisit:function(e){var t,i,n,o,r=this,s=JSON.parse(window.sessionStorage.getItem("inertiaLocationVisit"));window.sessionStorage.removeItem("inertiaLocationVisit"),e.url+=window.location.hash,e.rememberedState=null!=(t=null==(i=window.history.state)?void 0:i.rememberedState)?t:{},e.scrollRegions=null!=(n=null==(o=window.history.state)?void 0:o.scrollRegions)?n:[],this.setPage(e,{preserveScroll:s.preserveScroll}).then(function(){s.preserveScroll&&r.restoreScrollPositions()})},isLocationVisitResponse:function(e){return e&&409===e.status&&e.headers["x-inertia-location"]},isInertiaResponse:function(e){return null==e?void 0:e.headers["x-inertia"]},cancelActiveVisits:function(){this.cancelToken&&this.cancelToken.cancel(),this.cancelToken=t.CancelToken.source()},createVisitId:function(){return this.visitId={},this.visitId},normalizeUrl:function(e){try{return e.startsWith("#")?new URL(""+this.urlWithoutHash(window.location)+e):new URL(e)}catch(t){return new URL(""+window.location.origin+e)}},urlWithoutHash:function(e){return(e=new URL(e.href)).hash="",e},visit:function(e,o){var r=this,s=void 0===o?{}:o,a=s.method,l=void 0===a?"get":a,c=s.data,h=void 0===c?{}:c,d=s.replace,u=void 0!==d&&d,p=s.preserveScroll,v=void 0!==p&&p,f=s.preserveState,m=void 0!==f&&f,w=s.only,g=void 0===w?[]:w,y=s.headers,S=void 0===y?{}:y,P=s.onCancelToken,b=void 0===P?function(){return{}}:P,E=s.onStart,L=void 0===E?function(){return{}}:E,I=s.onProgress,V=void 0===I?function(){return{}}:I,R=s.onFinish,C=void 0===R?function(){return{}}:R,k=s.onCancel,T=void 0===k?function(){return{}}:k,x=s.onSuccess,W=void 0===x?function(){return{}}:x,H=i({url:e=this.normalizeUrl(e)},arguments[1]);if(!1!==L(H)&&this.fireEvent("start",{cancelable:!0,detail:{visit:H}})){this.cancelActiveVisits(),this.saveScrollPositions();var U=this.createVisitId();return b(this.cancelToken),new Proxy(t({method:l,url:this.urlWithoutHash(e).href,data:"get"===l.toLowerCase()?{}:h,params:"get"===l.toLowerCase()?h:{},cancelToken:this.cancelToken.token,headers:i({},S,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},g.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":g.join(",")}:{},this.page.version?{"X-Inertia-Version":this.page.version}:{}),onUploadProgress:function(e){e.percentage=Math.round(e.loaded/e.total*100),r.fireEvent("progress",{detail:{progress:e}}),V(e)}}).then(function(t){if(!r.isInertiaResponse(t))return Promise.reject({response:t});g.length&&t.data.component===r.page.component&&(t.data.props=i({},r.page.props,t.data.props));var n=r.normalizeUrl(t.data.url);return e.hash&&!n.hash&&r.urlWithoutHash(e).href===n.href&&(n.hash=e.hash,t.data.url=n.href),r.setPage(t.data,{visitId:U,replace:u,preserveScroll:v,preserveState:m})}).then(function(){return r.fireEvent("success",{detail:{page:r.page}}),W(r.page)}).catch(function(i){if(r.isInertiaResponse(i.response))return r.setPage(i.response.data,{visitId:U});if(t.isCancel(i))T();else if(r.isLocationVisitResponse(i.response)){var o=r.normalizeUrl(i.response.headers["x-inertia-location"]);e.hash&&!o.hash&&r.urlWithoutHash(e).href===o.href&&(o.hash=e.hash),r.locationVisit(o,v)}else{if(!i.response)return Promise.reject(i);r.fireEvent("invalid",{cancelable:!0,detail:{response:i.response}})&&n.show(i.response.data)}}).catch(function(e){if(r.fireEvent("error",{cancelable:!0,detail:{error:e}}))return Promise.reject(e)}).finally(function(){r.fireEvent("finish"),C()}),{get:function(e,t){return["then","catch","finally"].includes(t)&&console.warn("Inertia.js visit promises have been deprecated and will be removed in a future release. Please use the new visit event callbacks instead.\n\nLearn more at https://inertiajs.com/manual-visits#promise-deprecation"),"function"==typeof e[t]?e[t].bind(e):e[t]}})}},setPage:function(e,t){var i=this,n=void 0===t?{}:t,o=n.visitId,r=void 0===o?this.createVisitId():o,s=n.replace,a=void 0!==s&&s,l=n.preserveScroll,c=void 0!==l&&l,h=n.preserveState,d=void 0!==h&&h;return Promise.resolve(this.resolveComponent(e.component)).then(function(t){r===i.visitId&&(e.props=i.transformProps(e.props),e.scrollRegions=e.scrollRegions||[],e.rememberedState=e.rememberedState||{},d="function"==typeof d?d(e):d,c="function"==typeof c?c(e):c,(a=a||i.normalizeUrl(e.url).href===window.location.href)?i.replaceState(e):i.pushState(e),i.swapComponent({component:t,page:e,preserveState:d}).then(function(){c||i.resetScrollPositions(),a||i.fireEvent("navigate",{detail:{page:e}})}))})},pushState:function(e){this.page=e,window.history.pushState(e,"",e.url)},replaceState:function(e){this.page=e,window.history.replaceState(e,"",e.url)},handlePopstateEvent:function(e){var t=this;if(null!==e.state){var n=e.state,o=this.createVisitId();return Promise.resolve(this.resolveComponent(n.component)).then(function(e){o===t.visitId&&(t.page=n,t.swapComponent({component:e,page:n,preserveState:!1}).then(function(){t.restoreScrollPositions(),t.fireEvent("navigate",{detail:{page:n}})}))})}var r=this.normalizeUrl(this.page.url);r.hash=window.location.hash,this.replaceState(i({},this.page,{url:r.href})),this.resetScrollPositions()},get:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({},n,{method:"get",data:t}))},reload:function(e){return void 0===e&&(e={}),this.replace(window.location.href,e)},replace:function(e,t){return void 0===t&&(t={}),this.visit(e,i({preserveState:!0},t,{replace:!0}))},post:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"post",data:t}))},put:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"put",data:t}))},patch:function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,i({preserveState:!0},n,{method:"patch",data:t}))},delete:function(e,t){return void 0===t&&(t={}),this.visit(e,i({preserveState:!0},t,{method:"delete"}))},remember:function(e,t){var n;void 0===t&&(t="default"),this.replaceState(i({},this.page,{rememberedState:i({},this.page.rememberedState,(n={},n[t]=e,n))}))},restore:function(e){var t,i;return void 0===e&&(e="default"),null==(t=window.history.state)||null==(i=t.rememberedState)?void 0:i[e]},fireEvent:function(e,t){return document.dispatchEvent(new CustomEvent("inertia:"+e,t))},on:function(e,t){var i=function(e){var i=t(e);e.cancelable&&!e.defaultPrevented&&!1===i&&e.preventDefault()};return document.addEventListener("inertia:"+e,i),function(){return document.removeEventListener("inertia:"+e,i)}}},exports.shouldIntercept=function(e){return!(e.target&&e.target.isContentEditable||e.defaultPrevented||e.which>1||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)};
 //# sourceMappingURL=index.js.map
 
 
@@ -4237,7 +4250,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.5.2 (https://getbootstrap.com/)
+  * Bootstrap v4.5.3 (https://getbootstrap.com/)
   * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -4246,8 +4259,10 @@ __webpack_require__.r(__webpack_exports__);
   undefined;
 }(this, (function (exports, $, Popper) { 'use strict';
 
-  $ = $ && Object.prototype.hasOwnProperty.call($, 'default') ? $['default'] : $;
-  Popper = Popper && Object.prototype.hasOwnProperty.call(Popper, 'default') ? Popper['default'] : Popper;
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var $__default = /*#__PURE__*/_interopDefaultLegacy($);
+  var Popper__default = /*#__PURE__*/_interopDefaultLegacy(Popper);
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -4291,7 +4306,7 @@ __webpack_require__.r(__webpack_exports__);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.5.2): util.js
+   * Bootstrap (v4.5.3): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4318,7 +4333,7 @@ __webpack_require__.r(__webpack_exports__);
       bindType: TRANSITION_END,
       delegateType: TRANSITION_END,
       handle: function handle(event) {
-        if ($(event.target).is(this)) {
+        if ($__default['default'](event.target).is(this)) {
           return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
         }
 
@@ -4331,7 +4346,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var called = false;
-    $(this).one(Util.TRANSITION_END, function () {
+    $__default['default'](this).one(Util.TRANSITION_END, function () {
       called = true;
     });
     setTimeout(function () {
@@ -4343,8 +4358,8 @@ __webpack_require__.r(__webpack_exports__);
   }
 
   function setTransitionEndSupport() {
-    $.fn.emulateTransitionEnd = transitionEndEmulator;
-    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+    $__default['default'].fn.emulateTransitionEnd = transitionEndEmulator;
+    $__default['default'].event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
   }
   /**
    * --------------------------------------------------------------------------
@@ -4357,7 +4372,6 @@ __webpack_require__.r(__webpack_exports__);
     TRANSITION_END: 'bsTransitionEnd',
     getUID: function getUID(prefix) {
       do {
-        // eslint-disable-next-line no-bitwise
         prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
       } while (document.getElementById(prefix));
 
@@ -4373,7 +4387,7 @@ __webpack_require__.r(__webpack_exports__);
 
       try {
         return document.querySelector(selector) ? selector : null;
-      } catch (err) {
+      } catch (_) {
         return null;
       }
     },
@@ -4383,8 +4397,8 @@ __webpack_require__.r(__webpack_exports__);
       } // Get transition-duration of the element
 
 
-      var transitionDuration = $(element).css('transition-duration');
-      var transitionDelay = $(element).css('transition-delay');
+      var transitionDuration = $__default['default'](element).css('transition-duration');
+      var transitionDelay = $__default['default'](element).css('transition-delay');
       var floatTransitionDuration = parseFloat(transitionDuration);
       var floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
 
@@ -4401,9 +4415,8 @@ __webpack_require__.r(__webpack_exports__);
       return element.offsetHeight;
     },
     triggerTransitionEnd: function triggerTransitionEnd(element) {
-      $(element).trigger(TRANSITION_END);
+      $__default['default'](element).trigger(TRANSITION_END);
     },
-    // TODO: Remove in v5
     supportsTransitionEnd: function supportsTransitionEnd() {
       return Boolean(TRANSITION_END);
     },
@@ -4446,11 +4459,11 @@ __webpack_require__.r(__webpack_exports__);
       return Util.findShadowRoot(element.parentNode);
     },
     jQueryDetection: function jQueryDetection() {
-      if (typeof $ === 'undefined') {
+      if (typeof $__default['default'] === 'undefined') {
         throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
       }
 
-      var version = $.fn.jquery.split(' ')[0].split('.');
+      var version = $__default['default'].fn.jquery.split(' ')[0].split('.');
       var minMajor = 1;
       var ltMajor = 2;
       var minMinor = 9;
@@ -4472,11 +4485,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME = 'alert';
-  var VERSION = '4.5.2';
+  var VERSION = '4.5.3';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
-  var JQUERY_NO_CONFLICT = $.fn[NAME];
+  var JQUERY_NO_CONFLICT = $__default['default'].fn[NAME];
   var SELECTOR_DISMISS = '[data-dismiss="alert"]';
   var EVENT_CLOSE = "close" + EVENT_KEY;
   var EVENT_CLOSED = "closed" + EVENT_KEY;
@@ -4516,7 +4529,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY);
+      $__default['default'].removeData(this._element, DATA_KEY);
       this._element = null;
     } // Private
     ;
@@ -4530,43 +4543,43 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!parent) {
-        parent = $(element).closest("." + CLASS_NAME_ALERT)[0];
+        parent = $__default['default'](element).closest("." + CLASS_NAME_ALERT)[0];
       }
 
       return parent;
     };
 
     _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
-      var closeEvent = $.Event(EVENT_CLOSE);
-      $(element).trigger(closeEvent);
+      var closeEvent = $__default['default'].Event(EVENT_CLOSE);
+      $__default['default'](element).trigger(closeEvent);
       return closeEvent;
     };
 
     _proto._removeElement = function _removeElement(element) {
       var _this = this;
 
-      $(element).removeClass(CLASS_NAME_SHOW);
+      $__default['default'](element).removeClass(CLASS_NAME_SHOW);
 
-      if (!$(element).hasClass(CLASS_NAME_FADE)) {
+      if (!$__default['default'](element).hasClass(CLASS_NAME_FADE)) {
         this._destroyElement(element);
 
         return;
       }
 
       var transitionDuration = Util.getTransitionDurationFromElement(element);
-      $(element).one(Util.TRANSITION_END, function (event) {
+      $__default['default'](element).one(Util.TRANSITION_END, function (event) {
         return _this._destroyElement(element, event);
       }).emulateTransitionEnd(transitionDuration);
     };
 
     _proto._destroyElement = function _destroyElement(element) {
-      $(element).detach().trigger(EVENT_CLOSED).remove();
+      $__default['default'](element).detach().trigger(EVENT_CLOSED).remove();
     } // Static
     ;
 
     Alert._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $(this);
+        var $element = $__default['default'](this);
         var data = $element.data(DATA_KEY);
 
         if (!data) {
@@ -4606,18 +4619,18 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API, SELECTOR_DISMISS, Alert._handleDismiss(new Alert()));
+  $__default['default'](document).on(EVENT_CLICK_DATA_API, SELECTOR_DISMISS, Alert._handleDismiss(new Alert()));
   /**
    * ------------------------------------------------------------------------
    * jQuery
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME] = Alert._jQueryInterface;
-  $.fn[NAME].Constructor = Alert;
+  $__default['default'].fn[NAME] = Alert._jQueryInterface;
+  $__default['default'].fn[NAME].Constructor = Alert;
 
-  $.fn[NAME].noConflict = function () {
-    $.fn[NAME] = JQUERY_NO_CONFLICT;
+  $__default['default'].fn[NAME].noConflict = function () {
+    $__default['default'].fn[NAME] = JQUERY_NO_CONFLICT;
     return Alert._jQueryInterface;
   };
 
@@ -4628,11 +4641,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$1 = 'button';
-  var VERSION$1 = '4.5.2';
+  var VERSION$1 = '4.5.3';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
   var DATA_API_KEY$1 = '.data-api';
-  var JQUERY_NO_CONFLICT$1 = $.fn[NAME$1];
+  var JQUERY_NO_CONFLICT$1 = $__default['default'].fn[NAME$1];
   var CLASS_NAME_ACTIVE = 'active';
   var CLASS_NAME_BUTTON = 'btn';
   var CLASS_NAME_FOCUS = 'focus';
@@ -4655,6 +4668,7 @@ __webpack_require__.r(__webpack_exports__);
   var Button = /*#__PURE__*/function () {
     function Button(element) {
       this._element = element;
+      this.shouldAvoidTriggerChange = false;
     } // Getters
 
 
@@ -4664,7 +4678,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
-      var rootElement = $(this._element).closest(SELECTOR_DATA_TOGGLES)[0];
+      var rootElement = $__default['default'](this._element).closest(SELECTOR_DATA_TOGGLES)[0];
 
       if (rootElement) {
         var input = this._element.querySelector(SELECTOR_INPUT);
@@ -4677,7 +4691,7 @@ __webpack_require__.r(__webpack_exports__);
               var activeElement = rootElement.querySelector(SELECTOR_ACTIVE);
 
               if (activeElement) {
-                $(activeElement).removeClass(CLASS_NAME_ACTIVE);
+                $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE);
               }
             }
           }
@@ -4688,7 +4702,9 @@ __webpack_require__.r(__webpack_exports__);
               input.checked = !this._element.classList.contains(CLASS_NAME_ACTIVE);
             }
 
-            $(input).trigger('change');
+            if (!this.shouldAvoidTriggerChange) {
+              $__default['default'](input).trigger('change');
+            }
           }
 
           input.focus();
@@ -4702,25 +4718,28 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (triggerChangeEvent) {
-          $(this._element).toggleClass(CLASS_NAME_ACTIVE);
+          $__default['default'](this._element).toggleClass(CLASS_NAME_ACTIVE);
         }
       }
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY$1);
+      $__default['default'].removeData(this._element, DATA_KEY$1);
       this._element = null;
     } // Static
     ;
 
-    Button._jQueryInterface = function _jQueryInterface(config) {
+    Button._jQueryInterface = function _jQueryInterface(config, avoidTriggerChange) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$1);
+        var $element = $__default['default'](this);
+        var data = $element.data(DATA_KEY$1);
 
         if (!data) {
           data = new Button(this);
-          $(this).data(DATA_KEY$1, data);
+          $element.data(DATA_KEY$1, data);
         }
+
+        data.shouldAvoidTriggerChange = avoidTriggerChange;
 
         if (config === 'toggle') {
           data[config]();
@@ -4744,12 +4763,12 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
+  $__default['default'](document).on(EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
     var button = event.target;
     var initialButton = button;
 
-    if (!$(button).hasClass(CLASS_NAME_BUTTON)) {
-      button = $(button).closest(SELECTOR_BUTTON)[0];
+    if (!$__default['default'](button).hasClass(CLASS_NAME_BUTTON)) {
+      button = $__default['default'](button).closest(SELECTOR_BUTTON)[0];
     }
 
     if (!button || button.hasAttribute('disabled') || button.classList.contains('disabled')) {
@@ -4763,15 +4782,15 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      if (initialButton.tagName !== 'LABEL' || inputBtn && inputBtn.type !== 'checkbox') {
-        Button._jQueryInterface.call($(button), 'toggle');
+      if (initialButton.tagName === 'INPUT' || button.tagName !== 'LABEL') {
+        Button._jQueryInterface.call($__default['default'](button), 'toggle', initialButton.tagName === 'INPUT');
       }
     }
   }).on(EVENT_FOCUS_BLUR_DATA_API, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
-    var button = $(event.target).closest(SELECTOR_BUTTON)[0];
-    $(button).toggleClass(CLASS_NAME_FOCUS, /^focus(in)?$/.test(event.type));
+    var button = $__default['default'](event.target).closest(SELECTOR_BUTTON)[0];
+    $__default['default'](button).toggleClass(CLASS_NAME_FOCUS, /^focus(in)?$/.test(event.type));
   });
-  $(window).on(EVENT_LOAD_DATA_API, function () {
+  $__default['default'](window).on(EVENT_LOAD_DATA_API, function () {
     // ensure correct active class is set to match the controls' actual values/states
     // find all checkboxes/readio buttons inside data-toggle groups
     var buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLES_BUTTONS));
@@ -4806,11 +4825,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$1] = Button._jQueryInterface;
-  $.fn[NAME$1].Constructor = Button;
+  $__default['default'].fn[NAME$1] = Button._jQueryInterface;
+  $__default['default'].fn[NAME$1].Constructor = Button;
 
-  $.fn[NAME$1].noConflict = function () {
-    $.fn[NAME$1] = JQUERY_NO_CONFLICT$1;
+  $__default['default'].fn[NAME$1].noConflict = function () {
+    $__default['default'].fn[NAME$1] = JQUERY_NO_CONFLICT$1;
     return Button._jQueryInterface;
   };
 
@@ -4821,11 +4840,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$2 = 'carousel';
-  var VERSION$2 = '4.5.2';
+  var VERSION$2 = '4.5.3';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
   var DATA_API_KEY$2 = '.data-api';
-  var JQUERY_NO_CONFLICT$2 = $.fn[NAME$2];
+  var JQUERY_NO_CONFLICT$2 = $__default['default'].fn[NAME$2];
   var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
 
   var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
@@ -4922,9 +4941,10 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.nextWhenVisible = function nextWhenVisible() {
-      // Don't call next when the page isn't visible
+      var $element = $__default['default'](this._element); // Don't call next when the page isn't visible
       // or the carousel or its parent isn't visible
-      if (!document.hidden && $(this._element).is(':visible') && $(this._element).css('visibility') !== 'hidden') {
+
+      if (!document.hidden && $element.is(':visible') && $element.css('visibility') !== 'hidden') {
         this.next();
       }
     };
@@ -4976,7 +4996,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this._isSliding) {
-        $(this._element).one(EVENT_SLID, function () {
+        $__default['default'](this._element).one(EVENT_SLID, function () {
           return _this.to(index);
         });
         return;
@@ -4994,8 +5014,8 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.dispose = function dispose() {
-      $(this._element).off(EVENT_KEY$2);
-      $.removeData(this._element, DATA_KEY$2);
+      $__default['default'](this._element).off(EVENT_KEY$2);
+      $__default['default'].removeData(this._element, DATA_KEY$2);
       this._items = null;
       this._config = null;
       this._element = null;
@@ -5037,13 +5057,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (this._config.keyboard) {
-        $(this._element).on(EVENT_KEYDOWN, function (event) {
+        $__default['default'](this._element).on(EVENT_KEYDOWN, function (event) {
           return _this2._keydown(event);
         });
       }
 
       if (this._config.pause === 'hover') {
-        $(this._element).on(EVENT_MOUSEENTER, function (event) {
+        $__default['default'](this._element).on(EVENT_MOUSEENTER, function (event) {
           return _this2.pause(event);
         }).on(EVENT_MOUSELEAVE, function (event) {
           return _this2.cycle(event);
@@ -5106,27 +5126,27 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
 
-      $(this._element.querySelectorAll(SELECTOR_ITEM_IMG)).on(EVENT_DRAG_START, function (e) {
+      $__default['default'](this._element.querySelectorAll(SELECTOR_ITEM_IMG)).on(EVENT_DRAG_START, function (e) {
         return e.preventDefault();
       });
 
       if (this._pointerEvent) {
-        $(this._element).on(EVENT_POINTERDOWN, function (event) {
+        $__default['default'](this._element).on(EVENT_POINTERDOWN, function (event) {
           return start(event);
         });
-        $(this._element).on(EVENT_POINTERUP, function (event) {
+        $__default['default'](this._element).on(EVENT_POINTERUP, function (event) {
           return end(event);
         });
 
         this._element.classList.add(CLASS_NAME_POINTER_EVENT);
       } else {
-        $(this._element).on(EVENT_TOUCHSTART, function (event) {
+        $__default['default'](this._element).on(EVENT_TOUCHSTART, function (event) {
           return start(event);
         });
-        $(this._element).on(EVENT_TOUCHMOVE, function (event) {
+        $__default['default'](this._element).on(EVENT_TOUCHMOVE, function (event) {
           return move(event);
         });
-        $(this._element).on(EVENT_TOUCHEND, function (event) {
+        $__default['default'](this._element).on(EVENT_TOUCHEND, function (event) {
           return end(event);
         });
       }
@@ -5178,25 +5198,25 @@ __webpack_require__.r(__webpack_exports__);
 
       var fromIndex = this._getItemIndex(this._element.querySelector(SELECTOR_ACTIVE_ITEM));
 
-      var slideEvent = $.Event(EVENT_SLIDE, {
+      var slideEvent = $__default['default'].Event(EVENT_SLIDE, {
         relatedTarget: relatedTarget,
         direction: eventDirectionName,
         from: fromIndex,
         to: targetIndex
       });
-      $(this._element).trigger(slideEvent);
+      $__default['default'](this._element).trigger(slideEvent);
       return slideEvent;
     };
 
     _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
       if (this._indicatorsElement) {
         var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(SELECTOR_ACTIVE$1));
-        $(indicators).removeClass(CLASS_NAME_ACTIVE$1);
+        $__default['default'](indicators).removeClass(CLASS_NAME_ACTIVE$1);
 
         var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
 
         if (nextIndicator) {
-          $(nextIndicator).addClass(CLASS_NAME_ACTIVE$1);
+          $__default['default'](nextIndicator).addClass(CLASS_NAME_ACTIVE$1);
         }
       }
     };
@@ -5227,7 +5247,7 @@ __webpack_require__.r(__webpack_exports__);
         eventDirectionName = DIRECTION_RIGHT;
       }
 
-      if (nextElement && $(nextElement).hasClass(CLASS_NAME_ACTIVE$1)) {
+      if (nextElement && $__default['default'](nextElement).hasClass(CLASS_NAME_ACTIVE$1)) {
         this._isSliding = false;
         return;
       }
@@ -5251,18 +5271,18 @@ __webpack_require__.r(__webpack_exports__);
 
       this._setActiveIndicatorElement(nextElement);
 
-      var slidEvent = $.Event(EVENT_SLID, {
+      var slidEvent = $__default['default'].Event(EVENT_SLID, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,
         to: nextElementIndex
       });
 
-      if ($(this._element).hasClass(CLASS_NAME_SLIDE)) {
-        $(nextElement).addClass(orderClassName);
+      if ($__default['default'](this._element).hasClass(CLASS_NAME_SLIDE)) {
+        $__default['default'](nextElement).addClass(orderClassName);
         Util.reflow(nextElement);
-        $(activeElement).addClass(directionalClassName);
-        $(nextElement).addClass(directionalClassName);
+        $__default['default'](activeElement).addClass(directionalClassName);
+        $__default['default'](nextElement).addClass(directionalClassName);
         var nextElementInterval = parseInt(nextElement.getAttribute('data-interval'), 10);
 
         if (nextElementInterval) {
@@ -5273,19 +5293,19 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         var transitionDuration = Util.getTransitionDurationFromElement(activeElement);
-        $(activeElement).one(Util.TRANSITION_END, function () {
-          $(nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(CLASS_NAME_ACTIVE$1);
-          $(activeElement).removeClass(CLASS_NAME_ACTIVE$1 + " " + orderClassName + " " + directionalClassName);
+        $__default['default'](activeElement).one(Util.TRANSITION_END, function () {
+          $__default['default'](nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(CLASS_NAME_ACTIVE$1);
+          $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE$1 + " " + orderClassName + " " + directionalClassName);
           _this4._isSliding = false;
           setTimeout(function () {
-            return $(_this4._element).trigger(slidEvent);
+            return $__default['default'](_this4._element).trigger(slidEvent);
           }, 0);
         }).emulateTransitionEnd(transitionDuration);
       } else {
-        $(activeElement).removeClass(CLASS_NAME_ACTIVE$1);
-        $(nextElement).addClass(CLASS_NAME_ACTIVE$1);
+        $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE$1);
+        $__default['default'](nextElement).addClass(CLASS_NAME_ACTIVE$1);
         this._isSliding = false;
-        $(this._element).trigger(slidEvent);
+        $__default['default'](this._element).trigger(slidEvent);
       }
 
       if (isCycling) {
@@ -5296,9 +5316,9 @@ __webpack_require__.r(__webpack_exports__);
 
     Carousel._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$2);
+        var data = $__default['default'](this).data(DATA_KEY$2);
 
-        var _config = _extends({}, Default, $(this).data());
+        var _config = _extends({}, Default, $__default['default'](this).data());
 
         if (typeof config === 'object') {
           _config = _extends({}, _config, config);
@@ -5308,7 +5328,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!data) {
           data = new Carousel(this, _config);
-          $(this).data(DATA_KEY$2, data);
+          $__default['default'](this).data(DATA_KEY$2, data);
         }
 
         if (typeof config === 'number') {
@@ -5333,13 +5353,13 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var target = $(selector)[0];
+      var target = $__default['default'](selector)[0];
 
-      if (!target || !$(target).hasClass(CLASS_NAME_CAROUSEL)) {
+      if (!target || !$__default['default'](target).hasClass(CLASS_NAME_CAROUSEL)) {
         return;
       }
 
-      var config = _extends({}, $(target).data(), $(this).data());
+      var config = _extends({}, $__default['default'](target).data(), $__default['default'](this).data());
 
       var slideIndex = this.getAttribute('data-slide-to');
 
@@ -5347,10 +5367,10 @@ __webpack_require__.r(__webpack_exports__);
         config.interval = false;
       }
 
-      Carousel._jQueryInterface.call($(target), config);
+      Carousel._jQueryInterface.call($__default['default'](target), config);
 
       if (slideIndex) {
-        $(target).data(DATA_KEY$2).to(slideIndex);
+        $__default['default'](target).data(DATA_KEY$2).to(slideIndex);
       }
 
       event.preventDefault();
@@ -5377,12 +5397,12 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API$2, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler);
-  $(window).on(EVENT_LOAD_DATA_API$1, function () {
+  $__default['default'](document).on(EVENT_CLICK_DATA_API$2, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler);
+  $__default['default'](window).on(EVENT_LOAD_DATA_API$1, function () {
     var carousels = [].slice.call(document.querySelectorAll(SELECTOR_DATA_RIDE));
 
     for (var i = 0, len = carousels.length; i < len; i++) {
-      var $carousel = $(carousels[i]);
+      var $carousel = $__default['default'](carousels[i]);
 
       Carousel._jQueryInterface.call($carousel, $carousel.data());
     }
@@ -5393,11 +5413,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$2] = Carousel._jQueryInterface;
-  $.fn[NAME$2].Constructor = Carousel;
+  $__default['default'].fn[NAME$2] = Carousel._jQueryInterface;
+  $__default['default'].fn[NAME$2].Constructor = Carousel;
 
-  $.fn[NAME$2].noConflict = function () {
-    $.fn[NAME$2] = JQUERY_NO_CONFLICT$2;
+  $__default['default'].fn[NAME$2].noConflict = function () {
+    $__default['default'].fn[NAME$2] = JQUERY_NO_CONFLICT$2;
     return Carousel._jQueryInterface;
   };
 
@@ -5408,11 +5428,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$3 = 'collapse';
-  var VERSION$3 = '4.5.2';
+  var VERSION$3 = '4.5.3';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
   var DATA_API_KEY$3 = '.data-api';
-  var JQUERY_NO_CONFLICT$3 = $.fn[NAME$3];
+  var JQUERY_NO_CONFLICT$3 = $__default['default'].fn[NAME$3];
   var Default$1 = {
     toggle: true,
     parent: ''
@@ -5478,7 +5498,7 @@ __webpack_require__.r(__webpack_exports__);
 
     // Public
     _proto.toggle = function toggle() {
-      if ($(this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if ($__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
         this.hide();
       } else {
         this.show();
@@ -5488,7 +5508,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto.show = function show() {
       var _this = this;
 
-      if (this._isTransitioning || $(this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if (this._isTransitioning || $__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
         return;
       }
 
@@ -5510,64 +5530,64 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (actives) {
-        activesData = $(actives).not(this._selector).data(DATA_KEY$3);
+        activesData = $__default['default'](actives).not(this._selector).data(DATA_KEY$3);
 
         if (activesData && activesData._isTransitioning) {
           return;
         }
       }
 
-      var startEvent = $.Event(EVENT_SHOW);
-      $(this._element).trigger(startEvent);
+      var startEvent = $__default['default'].Event(EVENT_SHOW);
+      $__default['default'](this._element).trigger(startEvent);
 
       if (startEvent.isDefaultPrevented()) {
         return;
       }
 
       if (actives) {
-        Collapse._jQueryInterface.call($(actives).not(this._selector), 'hide');
+        Collapse._jQueryInterface.call($__default['default'](actives).not(this._selector), 'hide');
 
         if (!activesData) {
-          $(actives).data(DATA_KEY$3, null);
+          $__default['default'](actives).data(DATA_KEY$3, null);
         }
       }
 
       var dimension = this._getDimension();
 
-      $(this._element).removeClass(CLASS_NAME_COLLAPSE).addClass(CLASS_NAME_COLLAPSING);
+      $__default['default'](this._element).removeClass(CLASS_NAME_COLLAPSE).addClass(CLASS_NAME_COLLAPSING);
       this._element.style[dimension] = 0;
 
       if (this._triggerArray.length) {
-        $(this._triggerArray).removeClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', true);
+        $__default['default'](this._triggerArray).removeClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', true);
       }
 
       this.setTransitioning(true);
 
       var complete = function complete() {
-        $(_this._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
+        $__default['default'](_this._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
         _this._element.style[dimension] = '';
 
         _this.setTransitioning(false);
 
-        $(_this._element).trigger(EVENT_SHOWN);
+        $__default['default'](_this._element).trigger(EVENT_SHOWN);
       };
 
       var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
       var scrollSize = "scroll" + capitalizedDimension;
       var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       this._element.style[dimension] = this._element[scrollSize] + "px";
     };
 
     _proto.hide = function hide() {
       var _this2 = this;
 
-      if (this._isTransitioning || !$(this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if (this._isTransitioning || !$__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
         return;
       }
 
-      var startEvent = $.Event(EVENT_HIDE);
-      $(this._element).trigger(startEvent);
+      var startEvent = $__default['default'].Event(EVENT_HIDE);
+      $__default['default'](this._element).trigger(startEvent);
 
       if (startEvent.isDefaultPrevented()) {
         return;
@@ -5577,7 +5597,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
       Util.reflow(this._element);
-      $(this._element).addClass(CLASS_NAME_COLLAPSING).removeClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
+      $__default['default'](this._element).addClass(CLASS_NAME_COLLAPSING).removeClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
       var triggerArrayLength = this._triggerArray.length;
 
       if (triggerArrayLength > 0) {
@@ -5586,10 +5606,10 @@ __webpack_require__.r(__webpack_exports__);
           var selector = Util.getSelectorFromElement(trigger);
 
           if (selector !== null) {
-            var $elem = $([].slice.call(document.querySelectorAll(selector)));
+            var $elem = $__default['default']([].slice.call(document.querySelectorAll(selector)));
 
             if (!$elem.hasClass(CLASS_NAME_SHOW$1)) {
-              $(trigger).addClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', false);
+              $__default['default'](trigger).addClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', false);
             }
           }
         }
@@ -5600,12 +5620,12 @@ __webpack_require__.r(__webpack_exports__);
       var complete = function complete() {
         _this2.setTransitioning(false);
 
-        $(_this2._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE).trigger(EVENT_HIDDEN);
+        $__default['default'](_this2._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE).trigger(EVENT_HIDDEN);
       };
 
       this._element.style[dimension] = '';
       var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
     };
 
     _proto.setTransitioning = function setTransitioning(isTransitioning) {
@@ -5613,7 +5633,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY$3);
+      $__default['default'].removeData(this._element, DATA_KEY$3);
       this._config = null;
       this._parent = null;
       this._element = null;
@@ -5631,7 +5651,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._getDimension = function _getDimension() {
-      var hasWidth = $(this._element).hasClass(DIMENSION_WIDTH);
+      var hasWidth = $__default['default'](this._element).hasClass(DIMENSION_WIDTH);
       return hasWidth ? DIMENSION_WIDTH : DIMENSION_HEIGHT;
     };
 
@@ -5652,17 +5672,17 @@ __webpack_require__.r(__webpack_exports__);
 
       var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
       var children = [].slice.call(parent.querySelectorAll(selector));
-      $(children).each(function (i, element) {
+      $__default['default'](children).each(function (i, element) {
         _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
       });
       return parent;
     };
 
     _proto._addAriaAndCollapsedClass = function _addAriaAndCollapsedClass(element, triggerArray) {
-      var isOpen = $(element).hasClass(CLASS_NAME_SHOW$1);
+      var isOpen = $__default['default'](element).hasClass(CLASS_NAME_SHOW$1);
 
       if (triggerArray.length) {
-        $(triggerArray).toggleClass(CLASS_NAME_COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
+        $__default['default'](triggerArray).toggleClass(CLASS_NAME_COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
       }
     } // Static
     ;
@@ -5674,10 +5694,10 @@ __webpack_require__.r(__webpack_exports__);
 
     Collapse._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $this = $(this);
-        var data = $this.data(DATA_KEY$3);
+        var $element = $__default['default'](this);
+        var data = $element.data(DATA_KEY$3);
 
-        var _config = _extends({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
+        var _config = _extends({}, Default$1, $element.data(), typeof config === 'object' && config ? config : {});
 
         if (!data && _config.toggle && typeof config === 'string' && /show|hide/.test(config)) {
           _config.toggle = false;
@@ -5685,7 +5705,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!data) {
           data = new Collapse(this, _config);
-          $this.data(DATA_KEY$3, data);
+          $element.data(DATA_KEY$3, data);
         }
 
         if (typeof config === 'string') {
@@ -5719,17 +5739,17 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$1, function (event) {
+  $__default['default'](document).on(EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$1, function (event) {
     // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
     if (event.currentTarget.tagName === 'A') {
       event.preventDefault();
     }
 
-    var $trigger = $(this);
+    var $trigger = $__default['default'](this);
     var selector = Util.getSelectorFromElement(this);
     var selectors = [].slice.call(document.querySelectorAll(selector));
-    $(selectors).each(function () {
-      var $target = $(this);
+    $__default['default'](selectors).each(function () {
+      var $target = $__default['default'](this);
       var data = $target.data(DATA_KEY$3);
       var config = data ? 'toggle' : $trigger.data();
 
@@ -5742,11 +5762,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$3] = Collapse._jQueryInterface;
-  $.fn[NAME$3].Constructor = Collapse;
+  $__default['default'].fn[NAME$3] = Collapse._jQueryInterface;
+  $__default['default'].fn[NAME$3].Constructor = Collapse;
 
-  $.fn[NAME$3].noConflict = function () {
-    $.fn[NAME$3] = JQUERY_NO_CONFLICT$3;
+  $__default['default'].fn[NAME$3].noConflict = function () {
+    $__default['default'].fn[NAME$3] = JQUERY_NO_CONFLICT$3;
     return Collapse._jQueryInterface;
   };
 
@@ -5757,11 +5777,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$4 = 'dropdown';
-  var VERSION$4 = '4.5.2';
+  var VERSION$4 = '4.5.3';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
   var DATA_API_KEY$4 = '.data-api';
-  var JQUERY_NO_CONFLICT$4 = $.fn[NAME$4];
+  var JQUERY_NO_CONFLICT$4 = $__default['default'].fn[NAME$4];
   var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 
   var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -5839,11 +5859,11 @@ __webpack_require__.r(__webpack_exports__);
 
     // Public
     _proto.toggle = function toggle() {
-      if (this._element.disabled || $(this._element).hasClass(CLASS_NAME_DISABLED)) {
+      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED)) {
         return;
       }
 
-      var isActive = $(this._menu).hasClass(CLASS_NAME_SHOW$2);
+      var isActive = $__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2);
 
       Dropdown._clearMenus();
 
@@ -5859,18 +5879,18 @@ __webpack_require__.r(__webpack_exports__);
         usePopper = false;
       }
 
-      if (this._element.disabled || $(this._element).hasClass(CLASS_NAME_DISABLED) || $(this._menu).hasClass(CLASS_NAME_SHOW$2)) {
+      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED) || $__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2)) {
         return;
       }
 
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var showEvent = $.Event(EVENT_SHOW$1, relatedTarget);
+      var showEvent = $__default['default'].Event(EVENT_SHOW$1, relatedTarget);
 
       var parent = Dropdown._getParentFromElement(this._element);
 
-      $(parent).trigger(showEvent);
+      $__default['default'](parent).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented()) {
         return;
@@ -5882,7 +5902,7 @@ __webpack_require__.r(__webpack_exports__);
          * Check for Popper dependency
          * Popper - https://popper.js.org
          */
-        if (typeof Popper === 'undefined') {
+        if (typeof Popper__default['default'] === 'undefined') {
           throw new TypeError('Bootstrap\'s dropdowns require Popper.js (https://popper.js.org/)');
         }
 
@@ -5902,41 +5922,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
         if (this._config.boundary !== 'scrollParent') {
-          $(parent).addClass(CLASS_NAME_POSITION_STATIC);
+          $__default['default'](parent).addClass(CLASS_NAME_POSITION_STATIC);
         }
 
-        this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
+        this._popper = new Popper__default['default'](referenceElement, this._menu, this._getPopperConfig());
       } // If this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      if ('ontouchstart' in document.documentElement && $(parent).closest(SELECTOR_NAVBAR_NAV).length === 0) {
-        $(document.body).children().on('mouseover', null, $.noop);
+      if ('ontouchstart' in document.documentElement && $__default['default'](parent).closest(SELECTOR_NAVBAR_NAV).length === 0) {
+        $__default['default'](document.body).children().on('mouseover', null, $__default['default'].noop);
       }
 
       this._element.focus();
 
       this._element.setAttribute('aria-expanded', true);
 
-      $(this._menu).toggleClass(CLASS_NAME_SHOW$2);
-      $(parent).toggleClass(CLASS_NAME_SHOW$2).trigger($.Event(EVENT_SHOWN$1, relatedTarget));
+      $__default['default'](this._menu).toggleClass(CLASS_NAME_SHOW$2);
+      $__default['default'](parent).toggleClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_SHOWN$1, relatedTarget));
     };
 
     _proto.hide = function hide() {
-      if (this._element.disabled || $(this._element).hasClass(CLASS_NAME_DISABLED) || !$(this._menu).hasClass(CLASS_NAME_SHOW$2)) {
+      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED) || !$__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2)) {
         return;
       }
 
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var hideEvent = $.Event(EVENT_HIDE$1, relatedTarget);
+      var hideEvent = $__default['default'].Event(EVENT_HIDE$1, relatedTarget);
 
       var parent = Dropdown._getParentFromElement(this._element);
 
-      $(parent).trigger(hideEvent);
+      $__default['default'](parent).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
@@ -5946,13 +5966,13 @@ __webpack_require__.r(__webpack_exports__);
         this._popper.destroy();
       }
 
-      $(this._menu).toggleClass(CLASS_NAME_SHOW$2);
-      $(parent).toggleClass(CLASS_NAME_SHOW$2).trigger($.Event(EVENT_HIDDEN$1, relatedTarget));
+      $__default['default'](this._menu).toggleClass(CLASS_NAME_SHOW$2);
+      $__default['default'](parent).toggleClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_HIDDEN$1, relatedTarget));
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY$4);
-      $(this._element).off(EVENT_KEY$4);
+      $__default['default'].removeData(this._element, DATA_KEY$4);
+      $__default['default'](this._element).off(EVENT_KEY$4);
       this._element = null;
       this._menu = null;
 
@@ -5975,7 +5995,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto._addEventListeners = function _addEventListeners() {
       var _this = this;
 
-      $(this._element).on(EVENT_CLICK, function (event) {
+      $__default['default'](this._element).on(EVENT_CLICK, function (event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -5984,7 +6004,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, this.constructor.Default, $(this._element).data(), config);
+      config = _extends({}, this.constructor.Default, $__default['default'](this._element).data(), config);
       Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
       return config;
     };
@@ -6002,16 +6022,16 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._getPlacement = function _getPlacement() {
-      var $parentDropdown = $(this._element.parentNode);
+      var $parentDropdown = $__default['default'](this._element.parentNode);
       var placement = PLACEMENT_BOTTOM; // Handle dropup
 
       if ($parentDropdown.hasClass(CLASS_NAME_DROPUP)) {
-        placement = $(this._menu).hasClass(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
+        placement = $__default['default'](this._menu).hasClass(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
       } else if ($parentDropdown.hasClass(CLASS_NAME_DROPRIGHT)) {
         placement = PLACEMENT_RIGHT;
       } else if ($parentDropdown.hasClass(CLASS_NAME_DROPLEFT)) {
         placement = PLACEMENT_LEFT;
-      } else if ($(this._menu).hasClass(CLASS_NAME_MENURIGHT)) {
+      } else if ($__default['default'](this._menu).hasClass(CLASS_NAME_MENURIGHT)) {
         placement = PLACEMENT_BOTTOMEND;
       }
 
@@ -6019,7 +6039,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._detectNavbar = function _detectNavbar() {
-      return $(this._element).closest('.navbar').length > 0;
+      return $__default['default'](this._element).closest('.navbar').length > 0;
     };
 
     _proto._getOffset = function _getOffset() {
@@ -6065,13 +6085,13 @@ __webpack_require__.r(__webpack_exports__);
 
     Dropdown._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$4);
+        var data = $__default['default'](this).data(DATA_KEY$4);
 
         var _config = typeof config === 'object' ? config : null;
 
         if (!data) {
           data = new Dropdown(this, _config);
-          $(this).data(DATA_KEY$4, data);
+          $__default['default'](this).data(DATA_KEY$4, data);
         }
 
         if (typeof config === 'string') {
@@ -6094,7 +6114,7 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0, len = toggles.length; i < len; i++) {
         var parent = Dropdown._getParentFromElement(toggles[i]);
 
-        var context = $(toggles[i]).data(DATA_KEY$4);
+        var context = $__default['default'](toggles[i]).data(DATA_KEY$4);
         var relatedTarget = {
           relatedTarget: toggles[i]
         };
@@ -6109,16 +6129,16 @@ __webpack_require__.r(__webpack_exports__);
 
         var dropdownMenu = context._menu;
 
-        if (!$(parent).hasClass(CLASS_NAME_SHOW$2)) {
+        if (!$__default['default'](parent).hasClass(CLASS_NAME_SHOW$2)) {
           continue;
         }
 
-        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $.contains(parent, event.target)) {
+        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $__default['default'].contains(parent, event.target)) {
           continue;
         }
 
-        var hideEvent = $.Event(EVENT_HIDE$1, relatedTarget);
-        $(parent).trigger(hideEvent);
+        var hideEvent = $__default['default'].Event(EVENT_HIDE$1, relatedTarget);
+        $__default['default'](parent).trigger(hideEvent);
 
         if (hideEvent.isDefaultPrevented()) {
           continue;
@@ -6127,7 +6147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
         if ('ontouchstart' in document.documentElement) {
-          $(document.body).children().off('mouseover', null, $.noop);
+          $__default['default'](document.body).children().off('mouseover', null, $__default['default'].noop);
         }
 
         toggles[i].setAttribute('aria-expanded', 'false');
@@ -6136,8 +6156,8 @@ __webpack_require__.r(__webpack_exports__);
           context._popper.destroy();
         }
 
-        $(dropdownMenu).removeClass(CLASS_NAME_SHOW$2);
-        $(parent).removeClass(CLASS_NAME_SHOW$2).trigger($.Event(EVENT_HIDDEN$1, relatedTarget));
+        $__default['default'](dropdownMenu).removeClass(CLASS_NAME_SHOW$2);
+        $__default['default'](parent).removeClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_HIDDEN$1, relatedTarget));
       }
     };
 
@@ -6161,17 +6181,17 @@ __webpack_require__.r(__webpack_exports__);
       //  - If key is other than escape
       //    - If key is not up or down => not a dropdown command
       //    - If trigger inside the menu => not a dropdown command
-      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $(event.target).closest(SELECTOR_MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
+      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $__default['default'](event.target).closest(SELECTOR_MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
       }
 
-      if (this.disabled || $(this).hasClass(CLASS_NAME_DISABLED)) {
+      if (this.disabled || $__default['default'](this).hasClass(CLASS_NAME_DISABLED)) {
         return;
       }
 
       var parent = Dropdown._getParentFromElement(this);
 
-      var isActive = $(parent).hasClass(CLASS_NAME_SHOW$2);
+      var isActive = $__default['default'](parent).hasClass(CLASS_NAME_SHOW$2);
 
       if (!isActive && event.which === ESCAPE_KEYCODE) {
         return;
@@ -6180,17 +6200,17 @@ __webpack_require__.r(__webpack_exports__);
       event.preventDefault();
       event.stopPropagation();
 
-      if (!isActive || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
+      if (!isActive || event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
         if (event.which === ESCAPE_KEYCODE) {
-          $(parent.querySelector(SELECTOR_DATA_TOGGLE$2)).trigger('focus');
+          $__default['default'](parent.querySelector(SELECTOR_DATA_TOGGLE$2)).trigger('focus');
         }
 
-        $(this).trigger('click');
+        $__default['default'](this).trigger('click');
         return;
       }
 
       var items = [].slice.call(parent.querySelectorAll(SELECTOR_VISIBLE_ITEMS)).filter(function (item) {
-        return $(item).is(':visible');
+        return $__default['default'](item).is(':visible');
       });
 
       if (items.length === 0) {
@@ -6242,11 +6262,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$2, Dropdown._dataApiKeydownHandler).on(EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown._dataApiKeydownHandler).on(EVENT_CLICK_DATA_API$4 + " " + EVENT_KEYUP_DATA_API, Dropdown._clearMenus).on(EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$2, function (event) {
+  $__default['default'](document).on(EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$2, Dropdown._dataApiKeydownHandler).on(EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown._dataApiKeydownHandler).on(EVENT_CLICK_DATA_API$4 + " " + EVENT_KEYUP_DATA_API, Dropdown._clearMenus).on(EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$2, function (event) {
     event.preventDefault();
     event.stopPropagation();
 
-    Dropdown._jQueryInterface.call($(this), 'toggle');
+    Dropdown._jQueryInterface.call($__default['default'](this), 'toggle');
   }).on(EVENT_CLICK_DATA_API$4, SELECTOR_FORM_CHILD, function (e) {
     e.stopPropagation();
   });
@@ -6256,11 +6276,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$4] = Dropdown._jQueryInterface;
-  $.fn[NAME$4].Constructor = Dropdown;
+  $__default['default'].fn[NAME$4] = Dropdown._jQueryInterface;
+  $__default['default'].fn[NAME$4].Constructor = Dropdown;
 
-  $.fn[NAME$4].noConflict = function () {
-    $.fn[NAME$4] = JQUERY_NO_CONFLICT$4;
+  $__default['default'].fn[NAME$4].noConflict = function () {
+    $__default['default'].fn[NAME$4] = JQUERY_NO_CONFLICT$4;
     return Dropdown._jQueryInterface;
   };
 
@@ -6271,11 +6291,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '4.5.2';
+  var VERSION$5 = '4.5.3';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
   var DATA_API_KEY$5 = '.data-api';
-  var JQUERY_NO_CONFLICT$5 = $.fn[NAME$5];
+  var JQUERY_NO_CONFLICT$5 = $__default['default'].fn[NAME$5];
   var ESCAPE_KEYCODE$1 = 27; // KeyboardEvent.which value for Escape (Esc) key
 
   var Default$3 = {
@@ -6349,14 +6369,14 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      if ($(this._element).hasClass(CLASS_NAME_FADE$1)) {
+      if ($__default['default'](this._element).hasClass(CLASS_NAME_FADE$1)) {
         this._isTransitioning = true;
       }
 
-      var showEvent = $.Event(EVENT_SHOW$2, {
+      var showEvent = $__default['default'].Event(EVENT_SHOW$2, {
         relatedTarget: relatedTarget
       });
-      $(this._element).trigger(showEvent);
+      $__default['default'](this._element).trigger(showEvent);
 
       if (this._isShown || showEvent.isDefaultPrevented()) {
         return;
@@ -6374,12 +6394,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this._setResizeEvent();
 
-      $(this._element).on(EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, function (event) {
+      $__default['default'](this._element).on(EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, function (event) {
         return _this.hide(event);
       });
-      $(this._dialog).on(EVENT_MOUSEDOWN_DISMISS, function () {
-        $(_this._element).one(EVENT_MOUSEUP_DISMISS, function (event) {
-          if ($(event.target).is(_this._element)) {
+      $__default['default'](this._dialog).on(EVENT_MOUSEDOWN_DISMISS, function () {
+        $__default['default'](_this._element).one(EVENT_MOUSEUP_DISMISS, function (event) {
+          if ($__default['default'](event.target).is(_this._element)) {
             _this._ignoreBackdropClick = true;
           }
         });
@@ -6401,15 +6421,15 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var hideEvent = $.Event(EVENT_HIDE$2);
-      $(this._element).trigger(hideEvent);
+      var hideEvent = $__default['default'].Event(EVENT_HIDE$2);
+      $__default['default'](this._element).trigger(hideEvent);
 
       if (!this._isShown || hideEvent.isDefaultPrevented()) {
         return;
       }
 
       this._isShown = false;
-      var transition = $(this._element).hasClass(CLASS_NAME_FADE$1);
+      var transition = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1);
 
       if (transition) {
         this._isTransitioning = true;
@@ -6419,14 +6439,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this._setResizeEvent();
 
-      $(document).off(EVENT_FOCUSIN);
-      $(this._element).removeClass(CLASS_NAME_SHOW$3);
-      $(this._element).off(EVENT_CLICK_DISMISS);
-      $(this._dialog).off(EVENT_MOUSEDOWN_DISMISS);
+      $__default['default'](document).off(EVENT_FOCUSIN);
+      $__default['default'](this._element).removeClass(CLASS_NAME_SHOW$3);
+      $__default['default'](this._element).off(EVENT_CLICK_DISMISS);
+      $__default['default'](this._dialog).off(EVENT_MOUSEDOWN_DISMISS);
 
       if (transition) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $(this._element).one(Util.TRANSITION_END, function (event) {
+        $__default['default'](this._element).one(Util.TRANSITION_END, function (event) {
           return _this2._hideModal(event);
         }).emulateTransitionEnd(transitionDuration);
       } else {
@@ -6436,7 +6456,7 @@ __webpack_require__.r(__webpack_exports__);
 
     _proto.dispose = function dispose() {
       [window, this._element, this._dialog].forEach(function (htmlElement) {
-        return $(htmlElement).off(EVENT_KEY$5);
+        return $__default['default'](htmlElement).off(EVENT_KEY$5);
       });
       /**
        * `document` has 2 events `EVENT_FOCUSIN` and `EVENT_CLICK_DATA_API`
@@ -6444,8 +6464,8 @@ __webpack_require__.r(__webpack_exports__);
        * It will remove `EVENT_CLICK_DATA_API` event that should remain
        */
 
-      $(document).off(EVENT_FOCUSIN);
-      $.removeData(this._element, DATA_KEY$5);
+      $__default['default'](document).off(EVENT_FOCUSIN);
+      $__default['default'].removeData(this._element, DATA_KEY$5);
       this._config = null;
       this._element = null;
       this._dialog = null;
@@ -6472,10 +6492,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (this._config.backdrop === 'static') {
-        var hideEventPrevented = $.Event(EVENT_HIDE_PREVENTED);
-        $(this._element).trigger(hideEventPrevented);
+        var hideEventPrevented = $__default['default'].Event(EVENT_HIDE_PREVENTED);
+        $__default['default'](this._element).trigger(hideEventPrevented);
 
-        if (hideEventPrevented.defaultPrevented) {
+        if (hideEventPrevented.isDefaultPrevented()) {
           return;
         }
 
@@ -6488,12 +6508,12 @@ __webpack_require__.r(__webpack_exports__);
         this._element.classList.add(CLASS_NAME_STATIC);
 
         var modalTransitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-        $(this._element).off(Util.TRANSITION_END);
-        $(this._element).one(Util.TRANSITION_END, function () {
+        $__default['default'](this._element).off(Util.TRANSITION_END);
+        $__default['default'](this._element).one(Util.TRANSITION_END, function () {
           _this3._element.classList.remove(CLASS_NAME_STATIC);
 
           if (!isModalOverflowing) {
-            $(_this3._element).one(Util.TRANSITION_END, function () {
+            $__default['default'](_this3._element).one(Util.TRANSITION_END, function () {
               _this3._element.style.overflowY = '';
             }).emulateTransitionEnd(_this3._element, modalTransitionDuration);
           }
@@ -6508,7 +6528,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto._showElement = function _showElement(relatedTarget) {
       var _this4 = this;
 
-      var transition = $(this._element).hasClass(CLASS_NAME_FADE$1);
+      var transition = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1);
       var modalBody = this._dialog ? this._dialog.querySelector(SELECTOR_MODAL_BODY) : null;
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
@@ -6524,7 +6544,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this._element.setAttribute('role', 'dialog');
 
-      if ($(this._dialog).hasClass(CLASS_NAME_SCROLLABLE) && modalBody) {
+      if ($__default['default'](this._dialog).hasClass(CLASS_NAME_SCROLLABLE) && modalBody) {
         modalBody.scrollTop = 0;
       } else {
         this._element.scrollTop = 0;
@@ -6534,13 +6554,13 @@ __webpack_require__.r(__webpack_exports__);
         Util.reflow(this._element);
       }
 
-      $(this._element).addClass(CLASS_NAME_SHOW$3);
+      $__default['default'](this._element).addClass(CLASS_NAME_SHOW$3);
 
       if (this._config.focus) {
         this._enforceFocus();
       }
 
-      var shownEvent = $.Event(EVENT_SHOWN$2, {
+      var shownEvent = $__default['default'].Event(EVENT_SHOWN$2, {
         relatedTarget: relatedTarget
       });
 
@@ -6550,12 +6570,12 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this4._isTransitioning = false;
-        $(_this4._element).trigger(shownEvent);
+        $__default['default'](_this4._element).trigger(shownEvent);
       };
 
       if (transition) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-        $(this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
+        $__default['default'](this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
       } else {
         transitionComplete();
       }
@@ -6564,9 +6584,9 @@ __webpack_require__.r(__webpack_exports__);
     _proto._enforceFocus = function _enforceFocus() {
       var _this5 = this;
 
-      $(document).off(EVENT_FOCUSIN) // Guard against infinite focus loop
+      $__default['default'](document).off(EVENT_FOCUSIN) // Guard against infinite focus loop
       .on(EVENT_FOCUSIN, function (event) {
-        if (document !== event.target && _this5._element !== event.target && $(_this5._element).has(event.target).length === 0) {
+        if (document !== event.target && _this5._element !== event.target && $__default['default'](_this5._element).has(event.target).length === 0) {
           _this5._element.focus();
         }
       });
@@ -6576,7 +6596,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this6 = this;
 
       if (this._isShown) {
-        $(this._element).on(EVENT_KEYDOWN_DISMISS, function (event) {
+        $__default['default'](this._element).on(EVENT_KEYDOWN_DISMISS, function (event) {
           if (_this6._config.keyboard && event.which === ESCAPE_KEYCODE$1) {
             event.preventDefault();
 
@@ -6586,7 +6606,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else if (!this._isShown) {
-        $(this._element).off(EVENT_KEYDOWN_DISMISS);
+        $__default['default'](this._element).off(EVENT_KEYDOWN_DISMISS);
       }
     };
 
@@ -6594,11 +6614,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this7 = this;
 
       if (this._isShown) {
-        $(window).on(EVENT_RESIZE, function (event) {
+        $__default['default'](window).on(EVENT_RESIZE, function (event) {
           return _this7.handleUpdate(event);
         });
       } else {
-        $(window).off(EVENT_RESIZE);
+        $__default['default'](window).off(EVENT_RESIZE);
       }
     };
 
@@ -6616,19 +6636,19 @@ __webpack_require__.r(__webpack_exports__);
       this._isTransitioning = false;
 
       this._showBackdrop(function () {
-        $(document.body).removeClass(CLASS_NAME_OPEN);
+        $__default['default'](document.body).removeClass(CLASS_NAME_OPEN);
 
         _this8._resetAdjustments();
 
         _this8._resetScrollbar();
 
-        $(_this8._element).trigger(EVENT_HIDDEN$2);
+        $__default['default'](_this8._element).trigger(EVENT_HIDDEN$2);
       });
     };
 
     _proto._removeBackdrop = function _removeBackdrop() {
       if (this._backdrop) {
-        $(this._backdrop).remove();
+        $__default['default'](this._backdrop).remove();
         this._backdrop = null;
       }
     };
@@ -6636,7 +6656,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto._showBackdrop = function _showBackdrop(callback) {
       var _this9 = this;
 
-      var animate = $(this._element).hasClass(CLASS_NAME_FADE$1) ? CLASS_NAME_FADE$1 : '';
+      var animate = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1) ? CLASS_NAME_FADE$1 : '';
 
       if (this._isShown && this._config.backdrop) {
         this._backdrop = document.createElement('div');
@@ -6646,8 +6666,8 @@ __webpack_require__.r(__webpack_exports__);
           this._backdrop.classList.add(animate);
         }
 
-        $(this._backdrop).appendTo(document.body);
-        $(this._element).on(EVENT_CLICK_DISMISS, function (event) {
+        $__default['default'](this._backdrop).appendTo(document.body);
+        $__default['default'](this._element).on(EVENT_CLICK_DISMISS, function (event) {
           if (_this9._ignoreBackdropClick) {
             _this9._ignoreBackdropClick = false;
             return;
@@ -6664,7 +6684,7 @@ __webpack_require__.r(__webpack_exports__);
           Util.reflow(this._backdrop);
         }
 
-        $(this._backdrop).addClass(CLASS_NAME_SHOW$3);
+        $__default['default'](this._backdrop).addClass(CLASS_NAME_SHOW$3);
 
         if (!callback) {
           return;
@@ -6676,9 +6696,9 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-        $(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
+        $__default['default'](this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
       } else if (!this._isShown && this._backdrop) {
-        $(this._backdrop).removeClass(CLASS_NAME_SHOW$3);
+        $__default['default'](this._backdrop).removeClass(CLASS_NAME_SHOW$3);
 
         var callbackRemove = function callbackRemove() {
           _this9._removeBackdrop();
@@ -6688,10 +6708,10 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
 
-        if ($(this._element).hasClass(CLASS_NAME_FADE$1)) {
+        if ($__default['default'](this._element).hasClass(CLASS_NAME_FADE$1)) {
           var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
 
-          $(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
+          $__default['default'](this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
         } else {
           callbackRemove();
         }
@@ -6736,46 +6756,46 @@ __webpack_require__.r(__webpack_exports__);
         var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
         var stickyContent = [].slice.call(document.querySelectorAll(SELECTOR_STICKY_CONTENT)); // Adjust fixed content padding
 
-        $(fixedContent).each(function (index, element) {
+        $__default['default'](fixedContent).each(function (index, element) {
           var actualPadding = element.style.paddingRight;
-          var calculatedPadding = $(element).css('padding-right');
-          $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
+          var calculatedPadding = $__default['default'](element).css('padding-right');
+          $__default['default'](element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
         }); // Adjust sticky content margin
 
-        $(stickyContent).each(function (index, element) {
+        $__default['default'](stickyContent).each(function (index, element) {
           var actualMargin = element.style.marginRight;
-          var calculatedMargin = $(element).css('margin-right');
-          $(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
+          var calculatedMargin = $__default['default'](element).css('margin-right');
+          $__default['default'](element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
         }); // Adjust body padding
 
         var actualPadding = document.body.style.paddingRight;
-        var calculatedPadding = $(document.body).css('padding-right');
-        $(document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
+        var calculatedPadding = $__default['default'](document.body).css('padding-right');
+        $__default['default'](document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
       }
 
-      $(document.body).addClass(CLASS_NAME_OPEN);
+      $__default['default'](document.body).addClass(CLASS_NAME_OPEN);
     };
 
     _proto._resetScrollbar = function _resetScrollbar() {
       // Restore fixed content padding
       var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
-      $(fixedContent).each(function (index, element) {
-        var padding = $(element).data('padding-right');
-        $(element).removeData('padding-right');
+      $__default['default'](fixedContent).each(function (index, element) {
+        var padding = $__default['default'](element).data('padding-right');
+        $__default['default'](element).removeData('padding-right');
         element.style.paddingRight = padding ? padding : '';
       }); // Restore sticky content
 
       var elements = [].slice.call(document.querySelectorAll("" + SELECTOR_STICKY_CONTENT));
-      $(elements).each(function (index, element) {
-        var margin = $(element).data('margin-right');
+      $__default['default'](elements).each(function (index, element) {
+        var margin = $__default['default'](element).data('margin-right');
 
         if (typeof margin !== 'undefined') {
-          $(element).css('margin-right', margin).removeData('margin-right');
+          $__default['default'](element).css('margin-right', margin).removeData('margin-right');
         }
       }); // Restore body padding
 
-      var padding = $(document.body).data('padding-right');
-      $(document.body).removeData('padding-right');
+      var padding = $__default['default'](document.body).data('padding-right');
+      $__default['default'](document.body).removeData('padding-right');
       document.body.style.paddingRight = padding ? padding : '';
     };
 
@@ -6792,13 +6812,13 @@ __webpack_require__.r(__webpack_exports__);
 
     Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$5);
+        var data = $__default['default'](this).data(DATA_KEY$5);
 
-        var _config = _extends({}, Default$3, $(this).data(), typeof config === 'object' && config ? config : {});
+        var _config = _extends({}, Default$3, $__default['default'](this).data(), typeof config === 'object' && config ? config : {});
 
         if (!data) {
           data = new Modal(this, _config);
-          $(this).data(DATA_KEY$5, data);
+          $__default['default'](this).data(DATA_KEY$5, data);
         }
 
         if (typeof config === 'string') {
@@ -6834,7 +6854,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API$5, SELECTOR_DATA_TOGGLE$3, function (event) {
+  $__default['default'](document).on(EVENT_CLICK_DATA_API$5, SELECTOR_DATA_TOGGLE$3, function (event) {
     var _this11 = this;
 
     var target;
@@ -6844,26 +6864,26 @@ __webpack_require__.r(__webpack_exports__);
       target = document.querySelector(selector);
     }
 
-    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _extends({}, $(target).data(), $(this).data());
+    var config = $__default['default'](target).data(DATA_KEY$5) ? 'toggle' : _extends({}, $__default['default'](target).data(), $__default['default'](this).data());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
     }
 
-    var $target = $(target).one(EVENT_SHOW$2, function (showEvent) {
+    var $target = $__default['default'](target).one(EVENT_SHOW$2, function (showEvent) {
       if (showEvent.isDefaultPrevented()) {
         // Only register focus restorer if modal will actually get shown
         return;
       }
 
       $target.one(EVENT_HIDDEN$2, function () {
-        if ($(_this11).is(':visible')) {
+        if ($__default['default'](_this11).is(':visible')) {
           _this11.focus();
         }
       });
     });
 
-    Modal._jQueryInterface.call($(target), config, this);
+    Modal._jQueryInterface.call($__default['default'](target), config, this);
   });
   /**
    * ------------------------------------------------------------------------
@@ -6871,17 +6891,17 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$5] = Modal._jQueryInterface;
-  $.fn[NAME$5].Constructor = Modal;
+  $__default['default'].fn[NAME$5] = Modal._jQueryInterface;
+  $__default['default'].fn[NAME$5].Constructor = Modal;
 
-  $.fn[NAME$5].noConflict = function () {
-    $.fn[NAME$5] = JQUERY_NO_CONFLICT$5;
+  $__default['default'].fn[NAME$5].noConflict = function () {
+    $__default['default'].fn[NAME$5] = JQUERY_NO_CONFLICT$5;
     return Modal._jQueryInterface;
   };
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.5.2): tools/sanitizer.js
+   * Bootstrap (v4.5.3): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7007,10 +7027,10 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$6 = 'tooltip';
-  var VERSION$6 = '4.5.2';
+  var VERSION$6 = '4.5.3';
   var DATA_KEY$6 = 'bs.tooltip';
   var EVENT_KEY$6 = "." + DATA_KEY$6;
-  var JQUERY_NO_CONFLICT$6 = $.fn[NAME$6];
+  var JQUERY_NO_CONFLICT$6 = $__default['default'].fn[NAME$6];
   var CLASS_PREFIX = 'bs-tooltip';
   var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
   var DISALLOWED_ATTRIBUTES = ['sanitize', 'whiteList', 'sanitizeFn'];
@@ -7087,7 +7107,7 @@ __webpack_require__.r(__webpack_exports__);
 
   var Tooltip = /*#__PURE__*/function () {
     function Tooltip(element, config) {
-      if (typeof Popper === 'undefined') {
+      if (typeof Popper__default['default'] === 'undefined') {
         throw new TypeError('Bootstrap\'s tooltips require Popper.js (https://popper.js.org/)');
       } // private
 
@@ -7128,11 +7148,11 @@ __webpack_require__.r(__webpack_exports__);
 
       if (event) {
         var dataKey = this.constructor.DATA_KEY;
-        var context = $(event.currentTarget).data(dataKey);
+        var context = $__default['default'](event.currentTarget).data(dataKey);
 
         if (!context) {
           context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $(event.currentTarget).data(dataKey, context);
+          $__default['default'](event.currentTarget).data(dataKey, context);
         }
 
         context._activeTrigger.click = !context._activeTrigger.click;
@@ -7143,7 +7163,7 @@ __webpack_require__.r(__webpack_exports__);
           context._leave(null, context);
         }
       } else {
-        if ($(this.getTipElement()).hasClass(CLASS_NAME_SHOW$4)) {
+        if ($__default['default'](this.getTipElement()).hasClass(CLASS_NAME_SHOW$4)) {
           this._leave(null, this);
 
           return;
@@ -7155,12 +7175,12 @@ __webpack_require__.r(__webpack_exports__);
 
     _proto.dispose = function dispose() {
       clearTimeout(this._timeout);
-      $.removeData(this.element, this.constructor.DATA_KEY);
-      $(this.element).off(this.constructor.EVENT_KEY);
-      $(this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
+      $__default['default'].removeData(this.element, this.constructor.DATA_KEY);
+      $__default['default'](this.element).off(this.constructor.EVENT_KEY);
+      $__default['default'](this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
 
       if (this.tip) {
-        $(this.tip).remove();
+        $__default['default'](this.tip).remove();
       }
 
       this._isEnabled = null;
@@ -7181,16 +7201,16 @@ __webpack_require__.r(__webpack_exports__);
     _proto.show = function show() {
       var _this = this;
 
-      if ($(this.element).css('display') === 'none') {
+      if ($__default['default'](this.element).css('display') === 'none') {
         throw new Error('Please use show on visible elements');
       }
 
-      var showEvent = $.Event(this.constructor.Event.SHOW);
+      var showEvent = $__default['default'].Event(this.constructor.Event.SHOW);
 
       if (this.isWithContent() && this._isEnabled) {
-        $(this.element).trigger(showEvent);
+        $__default['default'](this.element).trigger(showEvent);
         var shadowRoot = Util.findShadowRoot(this.element);
-        var isInTheDom = $.contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
+        var isInTheDom = $__default['default'].contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
 
         if (showEvent.isDefaultPrevented() || !isInTheDom) {
           return;
@@ -7203,7 +7223,7 @@ __webpack_require__.r(__webpack_exports__);
         this.setContent();
 
         if (this.config.animation) {
-          $(tip).addClass(CLASS_NAME_FADE$2);
+          $__default['default'](tip).addClass(CLASS_NAME_FADE$2);
         }
 
         var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
@@ -7214,21 +7234,21 @@ __webpack_require__.r(__webpack_exports__);
 
         var container = this._getContainer();
 
-        $(tip).data(this.constructor.DATA_KEY, this);
+        $__default['default'](tip).data(this.constructor.DATA_KEY, this);
 
-        if (!$.contains(this.element.ownerDocument.documentElement, this.tip)) {
-          $(tip).appendTo(container);
+        if (!$__default['default'].contains(this.element.ownerDocument.documentElement, this.tip)) {
+          $__default['default'](tip).appendTo(container);
         }
 
-        $(this.element).trigger(this.constructor.Event.INSERTED);
-        this._popper = new Popper(this.element, tip, this._getPopperConfig(attachment));
-        $(tip).addClass(CLASS_NAME_SHOW$4); // If this is a touch-enabled device we add extra
+        $__default['default'](this.element).trigger(this.constructor.Event.INSERTED);
+        this._popper = new Popper__default['default'](this.element, tip, this._getPopperConfig(attachment));
+        $__default['default'](tip).addClass(CLASS_NAME_SHOW$4); // If this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
         if ('ontouchstart' in document.documentElement) {
-          $(document.body).children().on('mouseover', null, $.noop);
+          $__default['default'](document.body).children().on('mouseover', null, $__default['default'].noop);
         }
 
         var complete = function complete() {
@@ -7238,16 +7258,16 @@ __webpack_require__.r(__webpack_exports__);
 
           var prevHoverState = _this._hoverState;
           _this._hoverState = null;
-          $(_this.element).trigger(_this.constructor.Event.SHOWN);
+          $__default['default'](_this.element).trigger(_this.constructor.Event.SHOWN);
 
           if (prevHoverState === HOVER_STATE_OUT) {
             _this._leave(null, _this);
           }
         };
 
-        if ($(this.tip).hasClass(CLASS_NAME_FADE$2)) {
+        if ($__default['default'](this.tip).hasClass(CLASS_NAME_FADE$2)) {
           var transitionDuration = Util.getTransitionDurationFromElement(this.tip);
-          $(this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+          $__default['default'](this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
         } else {
           complete();
         }
@@ -7258,7 +7278,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var tip = this.getTipElement();
-      var hideEvent = $.Event(this.constructor.Event.HIDE);
+      var hideEvent = $__default['default'].Event(this.constructor.Event.HIDE);
 
       var complete = function complete() {
         if (_this2._hoverState !== HOVER_STATE_SHOW && tip.parentNode) {
@@ -7269,7 +7289,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.element.removeAttribute('aria-describedby');
 
-        $(_this2.element).trigger(_this2.constructor.Event.HIDDEN);
+        $__default['default'](_this2.element).trigger(_this2.constructor.Event.HIDDEN);
 
         if (_this2._popper !== null) {
           _this2._popper.destroy();
@@ -7280,26 +7300,26 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
 
-      $(this.element).trigger(hideEvent);
+      $__default['default'](this.element).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
       }
 
-      $(tip).removeClass(CLASS_NAME_SHOW$4); // If this is a touch-enabled device we remove the extra
+      $__default['default'](tip).removeClass(CLASS_NAME_SHOW$4); // If this is a touch-enabled device we remove the extra
       // empty mouseover listeners we added for iOS support
 
       if ('ontouchstart' in document.documentElement) {
-        $(document.body).children().off('mouseover', null, $.noop);
+        $__default['default'](document.body).children().off('mouseover', null, $__default['default'].noop);
       }
 
       this._activeTrigger[TRIGGER_CLICK] = false;
       this._activeTrigger[TRIGGER_FOCUS] = false;
       this._activeTrigger[TRIGGER_HOVER] = false;
 
-      if ($(this.tip).hasClass(CLASS_NAME_FADE$2)) {
+      if ($__default['default'](this.tip).hasClass(CLASS_NAME_FADE$2)) {
         var transitionDuration = Util.getTransitionDurationFromElement(tip);
-        $(tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default['default'](tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -7319,29 +7339,29 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $(this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
+      $__default['default'](this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $__default['default'](this.config.template)[0];
       return this.tip;
     };
 
     _proto.setContent = function setContent() {
       var tip = this.getTipElement();
-      this.setElementContent($(tip.querySelectorAll(SELECTOR_TOOLTIP_INNER)), this.getTitle());
-      $(tip).removeClass(CLASS_NAME_FADE$2 + " " + CLASS_NAME_SHOW$4);
+      this.setElementContent($__default['default'](tip.querySelectorAll(SELECTOR_TOOLTIP_INNER)), this.getTitle());
+      $__default['default'](tip).removeClass(CLASS_NAME_FADE$2 + " " + CLASS_NAME_SHOW$4);
     };
 
     _proto.setElementContent = function setElementContent($element, content) {
       if (typeof content === 'object' && (content.nodeType || content.jquery)) {
         // Content is a DOM node or a jQuery
         if (this.config.html) {
-          if (!$(content).parent().is($element)) {
+          if (!$__default['default'](content).parent().is($element)) {
             $element.empty().append(content);
           }
         } else {
-          $element.text($(content).text());
+          $element.text($__default['default'](content).text());
         }
 
         return;
@@ -7421,10 +7441,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (Util.isElement(this.config.container)) {
-        return $(this.config.container);
+        return $__default['default'](this.config.container);
       }
 
-      return $(document).find(this.config.container);
+      return $__default['default'](document).find(this.config.container);
     };
 
     _proto._getAttachment = function _getAttachment(placement) {
@@ -7437,13 +7457,13 @@ __webpack_require__.r(__webpack_exports__);
       var triggers = this.config.trigger.split(' ');
       triggers.forEach(function (trigger) {
         if (trigger === 'click') {
-          $(_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
+          $__default['default'](_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
             return _this5.toggle(event);
           });
         } else if (trigger !== TRIGGER_MANUAL) {
           var eventIn = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSEENTER : _this5.constructor.Event.FOCUSIN;
           var eventOut = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSELEAVE : _this5.constructor.Event.FOCUSOUT;
-          $(_this5.element).on(eventIn, _this5.config.selector, function (event) {
+          $__default['default'](_this5.element).on(eventIn, _this5.config.selector, function (event) {
             return _this5._enter(event);
           }).on(eventOut, _this5.config.selector, function (event) {
             return _this5._leave(event);
@@ -7457,7 +7477,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
 
-      $(this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
+      $__default['default'](this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
 
       if (this.config.selector) {
         this.config = _extends({}, this.config, {
@@ -7480,18 +7500,18 @@ __webpack_require__.r(__webpack_exports__);
 
     _proto._enter = function _enter(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $__default['default'](event.currentTarget).data(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        $__default['default'](event.currentTarget).data(dataKey, context);
       }
 
       if (event) {
         context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
       }
 
-      if ($(context.getTipElement()).hasClass(CLASS_NAME_SHOW$4) || context._hoverState === HOVER_STATE_SHOW) {
+      if ($__default['default'](context.getTipElement()).hasClass(CLASS_NAME_SHOW$4) || context._hoverState === HOVER_STATE_SHOW) {
         context._hoverState = HOVER_STATE_SHOW;
         return;
       }
@@ -7513,11 +7533,11 @@ __webpack_require__.r(__webpack_exports__);
 
     _proto._leave = function _leave(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $__default['default'](event.currentTarget).data(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        $__default['default'](event.currentTarget).data(dataKey, context);
       }
 
       if (event) {
@@ -7554,7 +7574,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._getConfig = function _getConfig(config) {
-      var dataAttributes = $(this.element).data();
+      var dataAttributes = $__default['default'](this.element).data();
       Object.keys(dataAttributes).forEach(function (dataAttr) {
         if (DISALLOWED_ATTRIBUTES.indexOf(dataAttr) !== -1) {
           delete dataAttributes[dataAttr];
@@ -7601,7 +7621,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $(this.getTipElement());
+      var $tip = $__default['default'](this.getTipElement());
       var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
 
       if (tabClass !== null && tabClass.length) {
@@ -7625,7 +7645,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      $(tip).removeClass(CLASS_NAME_FADE$2);
+      $__default['default'](tip).removeClass(CLASS_NAME_FADE$2);
       this.config.animation = false;
       this.hide();
       this.show();
@@ -7635,7 +7655,8 @@ __webpack_require__.r(__webpack_exports__);
 
     Tooltip._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$6);
+        var $element = $__default['default'](this);
+        var data = $element.data(DATA_KEY$6);
 
         var _config = typeof config === 'object' && config;
 
@@ -7645,7 +7666,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!data) {
           data = new Tooltip(this, _config);
-          $(this).data(DATA_KEY$6, data);
+          $element.data(DATA_KEY$6, data);
         }
 
         if (typeof config === 'string') {
@@ -7704,11 +7725,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $.fn[NAME$6] = Tooltip._jQueryInterface;
-  $.fn[NAME$6].Constructor = Tooltip;
+  $__default['default'].fn[NAME$6] = Tooltip._jQueryInterface;
+  $__default['default'].fn[NAME$6].Constructor = Tooltip;
 
-  $.fn[NAME$6].noConflict = function () {
-    $.fn[NAME$6] = JQUERY_NO_CONFLICT$6;
+  $__default['default'].fn[NAME$6].noConflict = function () {
+    $__default['default'].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
     return Tooltip._jQueryInterface;
   };
 
@@ -7719,10 +7740,10 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$7 = 'popover';
-  var VERSION$7 = '4.5.2';
+  var VERSION$7 = '4.5.3';
   var DATA_KEY$7 = 'bs.popover';
   var EVENT_KEY$7 = "." + DATA_KEY$7;
-  var JQUERY_NO_CONFLICT$7 = $.fn[NAME$7];
+  var JQUERY_NO_CONFLICT$7 = $__default['default'].fn[NAME$7];
   var CLASS_PREFIX$1 = 'bs-popover';
   var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
 
@@ -7774,16 +7795,16 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $(this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
+      $__default['default'](this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $__default['default'](this.config.template)[0];
       return this.tip;
     };
 
     _proto.setContent = function setContent() {
-      var $tip = $(this.getTipElement()); // We use append for html objects to maintain js events
+      var $tip = $__default['default'](this.getTipElement()); // We use append for html objects to maintain js events
 
       this.setElementContent($tip.find(SELECTOR_TITLE), this.getTitle());
 
@@ -7803,7 +7824,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $(this.getTipElement());
+      var $tip = $__default['default'](this.getTipElement());
       var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX$1);
 
       if (tabClass !== null && tabClass.length > 0) {
@@ -7814,7 +7835,7 @@ __webpack_require__.r(__webpack_exports__);
 
     Popover._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$7);
+        var data = $__default['default'](this).data(DATA_KEY$7);
 
         var _config = typeof config === 'object' ? config : null;
 
@@ -7824,7 +7845,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!data) {
           data = new Popover(this, _config);
-          $(this).data(DATA_KEY$7, data);
+          $__default['default'](this).data(DATA_KEY$7, data);
         }
 
         if (typeof config === 'string') {
@@ -7884,11 +7905,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $.fn[NAME$7] = Popover._jQueryInterface;
-  $.fn[NAME$7].Constructor = Popover;
+  $__default['default'].fn[NAME$7] = Popover._jQueryInterface;
+  $__default['default'].fn[NAME$7].Constructor = Popover;
 
-  $.fn[NAME$7].noConflict = function () {
-    $.fn[NAME$7] = JQUERY_NO_CONFLICT$7;
+  $__default['default'].fn[NAME$7].noConflict = function () {
+    $__default['default'].fn[NAME$7] = JQUERY_NO_CONFLICT$7;
     return Popover._jQueryInterface;
   };
 
@@ -7899,11 +7920,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$8 = 'scrollspy';
-  var VERSION$8 = '4.5.2';
+  var VERSION$8 = '4.5.3';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
   var DATA_API_KEY$6 = '.data-api';
-  var JQUERY_NO_CONFLICT$8 = $.fn[NAME$8];
+  var JQUERY_NO_CONFLICT$8 = $__default['default'].fn[NAME$8];
   var Default$6 = {
     offset: 10,
     method: 'auto',
@@ -7947,7 +7968,7 @@ __webpack_require__.r(__webpack_exports__);
       this._targets = [];
       this._activeTarget = null;
       this._scrollHeight = 0;
-      $(this._scrollElement).on(EVENT_SCROLL, function (event) {
+      $__default['default'](this._scrollElement).on(EVENT_SCROLL, function (event) {
         return _this._process(event);
       });
       this.refresh();
@@ -7982,7 +8003,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (targetBCR.width || targetBCR.height) {
             // TODO (fat): remove sketch reliance on jQuery position/offset
-            return [$(target)[offsetMethod]().top + offsetBase, targetSelector];
+            return [$__default['default'](target)[offsetMethod]().top + offsetBase, targetSelector];
           }
         }
 
@@ -7999,8 +8020,8 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY$8);
-      $(this._scrollElement).off(EVENT_KEY$8);
+      $__default['default'].removeData(this._element, DATA_KEY$8);
+      $__default['default'](this._scrollElement).off(EVENT_KEY$8);
       this._element = null;
       this._scrollElement = null;
       this._config = null;
@@ -8016,11 +8037,11 @@ __webpack_require__.r(__webpack_exports__);
       config = _extends({}, Default$6, typeof config === 'object' && config ? config : {});
 
       if (typeof config.target !== 'string' && Util.isElement(config.target)) {
-        var id = $(config.target).attr('id');
+        var id = $__default['default'](config.target).attr('id');
 
         if (!id) {
           id = Util.getUID(NAME$8);
-          $(config.target).attr('id', id);
+          $__default['default'](config.target).attr('id', id);
         }
 
         config.target = "#" + id;
@@ -8089,7 +8110,7 @@ __webpack_require__.r(__webpack_exports__);
         return selector + "[data-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
       });
 
-      var $link = $([].slice.call(document.querySelectorAll(queries.join(','))));
+      var $link = $__default['default']([].slice.call(document.querySelectorAll(queries.join(','))));
 
       if ($link.hasClass(CLASS_NAME_DROPDOWN_ITEM)) {
         $link.closest(SELECTOR_DROPDOWN).find(SELECTOR_DROPDOWN_TOGGLE).addClass(CLASS_NAME_ACTIVE$2);
@@ -8104,7 +8125,7 @@ __webpack_require__.r(__webpack_exports__);
         $link.parents(SELECTOR_NAV_LIST_GROUP).prev(SELECTOR_NAV_ITEMS).children(SELECTOR_NAV_LINKS).addClass(CLASS_NAME_ACTIVE$2);
       }
 
-      $(this._scrollElement).trigger(EVENT_ACTIVATE, {
+      $__default['default'](this._scrollElement).trigger(EVENT_ACTIVATE, {
         relatedTarget: target
       });
     };
@@ -8120,13 +8141,13 @@ __webpack_require__.r(__webpack_exports__);
 
     ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$8);
+        var data = $__default['default'](this).data(DATA_KEY$8);
 
         var _config = typeof config === 'object' && config;
 
         if (!data) {
           data = new ScrollSpy(this, _config);
-          $(this).data(DATA_KEY$8, data);
+          $__default['default'](this).data(DATA_KEY$8, data);
         }
 
         if (typeof config === 'string') {
@@ -8160,12 +8181,12 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(window).on(EVENT_LOAD_DATA_API$2, function () {
+  $__default['default'](window).on(EVENT_LOAD_DATA_API$2, function () {
     var scrollSpys = [].slice.call(document.querySelectorAll(SELECTOR_DATA_SPY));
     var scrollSpysLength = scrollSpys.length;
 
     for (var i = scrollSpysLength; i--;) {
-      var $spy = $(scrollSpys[i]);
+      var $spy = $__default['default'](scrollSpys[i]);
 
       ScrollSpy._jQueryInterface.call($spy, $spy.data());
     }
@@ -8176,11 +8197,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$8] = ScrollSpy._jQueryInterface;
-  $.fn[NAME$8].Constructor = ScrollSpy;
+  $__default['default'].fn[NAME$8] = ScrollSpy._jQueryInterface;
+  $__default['default'].fn[NAME$8].Constructor = ScrollSpy;
 
-  $.fn[NAME$8].noConflict = function () {
-    $.fn[NAME$8] = JQUERY_NO_CONFLICT$8;
+  $__default['default'].fn[NAME$8].noConflict = function () {
+    $__default['default'].fn[NAME$8] = JQUERY_NO_CONFLICT$8;
     return ScrollSpy._jQueryInterface;
   };
 
@@ -8191,11 +8212,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$9 = 'tab';
-  var VERSION$9 = '4.5.2';
+  var VERSION$9 = '4.5.3';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
   var DATA_API_KEY$7 = '.data-api';
-  var JQUERY_NO_CONFLICT$9 = $.fn[NAME$9];
+  var JQUERY_NO_CONFLICT$9 = $__default['default'].fn[NAME$9];
   var EVENT_HIDE$3 = "hide" + EVENT_KEY$9;
   var EVENT_HIDDEN$3 = "hidden" + EVENT_KEY$9;
   var EVENT_SHOW$3 = "show" + EVENT_KEY$9;
@@ -8231,33 +8252,33 @@ __webpack_require__.r(__webpack_exports__);
     _proto.show = function show() {
       var _this = this;
 
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $(this._element).hasClass(CLASS_NAME_ACTIVE$3) || $(this._element).hasClass(CLASS_NAME_DISABLED$1)) {
+      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $__default['default'](this._element).hasClass(CLASS_NAME_ACTIVE$3) || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED$1)) {
         return;
       }
 
       var target;
       var previous;
-      var listElement = $(this._element).closest(SELECTOR_NAV_LIST_GROUP$1)[0];
+      var listElement = $__default['default'](this._element).closest(SELECTOR_NAV_LIST_GROUP$1)[0];
       var selector = Util.getSelectorFromElement(this._element);
 
       if (listElement) {
         var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE$2;
-        previous = $.makeArray($(listElement).find(itemSelector));
+        previous = $__default['default'].makeArray($__default['default'](listElement).find(itemSelector));
         previous = previous[previous.length - 1];
       }
 
-      var hideEvent = $.Event(EVENT_HIDE$3, {
+      var hideEvent = $__default['default'].Event(EVENT_HIDE$3, {
         relatedTarget: this._element
       });
-      var showEvent = $.Event(EVENT_SHOW$3, {
+      var showEvent = $__default['default'].Event(EVENT_SHOW$3, {
         relatedTarget: previous
       });
 
       if (previous) {
-        $(previous).trigger(hideEvent);
+        $__default['default'](previous).trigger(hideEvent);
       }
 
-      $(this._element).trigger(showEvent);
+      $__default['default'](this._element).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
         return;
@@ -8270,14 +8291,14 @@ __webpack_require__.r(__webpack_exports__);
       this._activate(this._element, listElement);
 
       var complete = function complete() {
-        var hiddenEvent = $.Event(EVENT_HIDDEN$3, {
+        var hiddenEvent = $__default['default'].Event(EVENT_HIDDEN$3, {
           relatedTarget: _this._element
         });
-        var shownEvent = $.Event(EVENT_SHOWN$3, {
+        var shownEvent = $__default['default'].Event(EVENT_SHOWN$3, {
           relatedTarget: previous
         });
-        $(previous).trigger(hiddenEvent);
-        $(_this._element).trigger(shownEvent);
+        $__default['default'](previous).trigger(hiddenEvent);
+        $__default['default'](_this._element).trigger(shownEvent);
       };
 
       if (target) {
@@ -8288,7 +8309,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     _proto.dispose = function dispose() {
-      $.removeData(this._element, DATA_KEY$9);
+      $__default['default'].removeData(this._element, DATA_KEY$9);
       this._element = null;
     } // Private
     ;
@@ -8296,9 +8317,9 @@ __webpack_require__.r(__webpack_exports__);
     _proto._activate = function _activate(element, container, callback) {
       var _this2 = this;
 
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $(container).find(SELECTOR_ACTIVE_UL) : $(container).children(SELECTOR_ACTIVE$2);
+      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $__default['default'](container).find(SELECTOR_ACTIVE_UL) : $__default['default'](container).children(SELECTOR_ACTIVE$2);
       var active = activeElements[0];
-      var isTransitioning = callback && active && $(active).hasClass(CLASS_NAME_FADE$4);
+      var isTransitioning = callback && active && $__default['default'](active).hasClass(CLASS_NAME_FADE$4);
 
       var complete = function complete() {
         return _this2._transitionComplete(element, active, callback);
@@ -8306,7 +8327,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (active && isTransitioning) {
         var transitionDuration = Util.getTransitionDurationFromElement(active);
-        $(active).removeClass(CLASS_NAME_SHOW$6).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default['default'](active).removeClass(CLASS_NAME_SHOW$6).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -8314,11 +8335,11 @@ __webpack_require__.r(__webpack_exports__);
 
     _proto._transitionComplete = function _transitionComplete(element, active, callback) {
       if (active) {
-        $(active).removeClass(CLASS_NAME_ACTIVE$3);
-        var dropdownChild = $(active.parentNode).find(SELECTOR_DROPDOWN_ACTIVE_CHILD)[0];
+        $__default['default'](active).removeClass(CLASS_NAME_ACTIVE$3);
+        var dropdownChild = $__default['default'](active.parentNode).find(SELECTOR_DROPDOWN_ACTIVE_CHILD)[0];
 
         if (dropdownChild) {
-          $(dropdownChild).removeClass(CLASS_NAME_ACTIVE$3);
+          $__default['default'](dropdownChild).removeClass(CLASS_NAME_ACTIVE$3);
         }
 
         if (active.getAttribute('role') === 'tab') {
@@ -8326,7 +8347,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      $(element).addClass(CLASS_NAME_ACTIVE$3);
+      $__default['default'](element).addClass(CLASS_NAME_ACTIVE$3);
 
       if (element.getAttribute('role') === 'tab') {
         element.setAttribute('aria-selected', true);
@@ -8338,12 +8359,12 @@ __webpack_require__.r(__webpack_exports__);
         element.classList.add(CLASS_NAME_SHOW$6);
       }
 
-      if (element.parentNode && $(element.parentNode).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
-        var dropdownElement = $(element).closest(SELECTOR_DROPDOWN$1)[0];
+      if (element.parentNode && $__default['default'](element.parentNode).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
+        var dropdownElement = $__default['default'](element).closest(SELECTOR_DROPDOWN$1)[0];
 
         if (dropdownElement) {
           var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(SELECTOR_DROPDOWN_TOGGLE$1));
-          $(dropdownToggleList).addClass(CLASS_NAME_ACTIVE$3);
+          $__default['default'](dropdownToggleList).addClass(CLASS_NAME_ACTIVE$3);
         }
 
         element.setAttribute('aria-expanded', true);
@@ -8357,7 +8378,7 @@ __webpack_require__.r(__webpack_exports__);
 
     Tab._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $this = $(this);
+        var $this = $__default['default'](this);
         var data = $this.data(DATA_KEY$9);
 
         if (!data) {
@@ -8391,10 +8412,10 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $(document).on(EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$4, function (event) {
+  $__default['default'](document).on(EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$4, function (event) {
     event.preventDefault();
 
-    Tab._jQueryInterface.call($(this), 'show');
+    Tab._jQueryInterface.call($__default['default'](this), 'show');
   });
   /**
    * ------------------------------------------------------------------------
@@ -8402,11 +8423,11 @@ __webpack_require__.r(__webpack_exports__);
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$9] = Tab._jQueryInterface;
-  $.fn[NAME$9].Constructor = Tab;
+  $__default['default'].fn[NAME$9] = Tab._jQueryInterface;
+  $__default['default'].fn[NAME$9].Constructor = Tab;
 
-  $.fn[NAME$9].noConflict = function () {
-    $.fn[NAME$9] = JQUERY_NO_CONFLICT$9;
+  $__default['default'].fn[NAME$9].noConflict = function () {
+    $__default['default'].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
     return Tab._jQueryInterface;
   };
 
@@ -8417,10 +8438,10 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$a = 'toast';
-  var VERSION$a = '4.5.2';
+  var VERSION$a = '4.5.3';
   var DATA_KEY$a = 'bs.toast';
   var EVENT_KEY$a = "." + DATA_KEY$a;
-  var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
+  var JQUERY_NO_CONFLICT$a = $__default['default'].fn[NAME$a];
   var EVENT_CLICK_DISMISS$1 = "click.dismiss" + EVENT_KEY$a;
   var EVENT_HIDE$4 = "hide" + EVENT_KEY$a;
   var EVENT_HIDDEN$4 = "hidden" + EVENT_KEY$a;
@@ -8463,8 +8484,8 @@ __webpack_require__.r(__webpack_exports__);
     _proto.show = function show() {
       var _this = this;
 
-      var showEvent = $.Event(EVENT_SHOW$4);
-      $(this._element).trigger(showEvent);
+      var showEvent = $__default['default'].Event(EVENT_SHOW$4);
+      $__default['default'](this._element).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented()) {
         return;
@@ -8481,7 +8502,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this._element.classList.add(CLASS_NAME_SHOW$7);
 
-        $(_this._element).trigger(EVENT_SHOWN$4);
+        $__default['default'](_this._element).trigger(EVENT_SHOWN$4);
 
         if (_this._config.autohide) {
           _this._timeout = setTimeout(function () {
@@ -8498,7 +8519,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this._config.animation) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -8509,8 +8530,8 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      var hideEvent = $.Event(EVENT_HIDE$4);
-      $(this._element).trigger(hideEvent);
+      var hideEvent = $__default['default'].Event(EVENT_HIDE$4);
+      $__default['default'](this._element).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
@@ -8526,15 +8547,15 @@ __webpack_require__.r(__webpack_exports__);
         this._element.classList.remove(CLASS_NAME_SHOW$7);
       }
 
-      $(this._element).off(EVENT_CLICK_DISMISS$1);
-      $.removeData(this._element, DATA_KEY$a);
+      $__default['default'](this._element).off(EVENT_CLICK_DISMISS$1);
+      $__default['default'].removeData(this._element, DATA_KEY$a);
       this._element = null;
       this._config = null;
     } // Private
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
+      config = _extends({}, Default$7, $__default['default'](this._element).data(), typeof config === 'object' && config ? config : {});
       Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
       return config;
     };
@@ -8542,7 +8563,7 @@ __webpack_require__.r(__webpack_exports__);
     _proto._setListeners = function _setListeners() {
       var _this2 = this;
 
-      $(this._element).on(EVENT_CLICK_DISMISS$1, SELECTOR_DATA_DISMISS$1, function () {
+      $__default['default'](this._element).on(EVENT_CLICK_DISMISS$1, SELECTOR_DATA_DISMISS$1, function () {
         return _this2.hide();
       });
     };
@@ -8553,14 +8574,14 @@ __webpack_require__.r(__webpack_exports__);
       var complete = function complete() {
         _this3._element.classList.add(CLASS_NAME_HIDE);
 
-        $(_this3._element).trigger(EVENT_HIDDEN$4);
+        $__default['default'](_this3._element).trigger(EVENT_HIDDEN$4);
       };
 
       this._element.classList.remove(CLASS_NAME_SHOW$7);
 
       if (this._config.animation) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -8574,7 +8595,7 @@ __webpack_require__.r(__webpack_exports__);
 
     Toast._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $(this);
+        var $element = $__default['default'](this);
         var data = $element.data(DATA_KEY$a);
 
         var _config = typeof config === 'object' && config;
@@ -8620,11 +8641,11 @@ __webpack_require__.r(__webpack_exports__);
    */
 
 
-  $.fn[NAME$a] = Toast._jQueryInterface;
-  $.fn[NAME$a].Constructor = Toast;
+  $__default['default'].fn[NAME$a] = Toast._jQueryInterface;
+  $__default['default'].fn[NAME$a].Constructor = Toast;
 
-  $.fn[NAME$a].noConflict = function () {
-    $.fn[NAME$a] = JQUERY_NO_CONFLICT$a;
+  $__default['default'].fn[NAME$a].noConflict = function () {
+    $__default['default'].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
     return Toast._jQueryInterface;
   };
 
@@ -19549,9 +19570,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+exports.useForm = useForm;
+
+var _inertia = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+var _vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 var _util = __webpack_require__(/*! ./util */ "./node_modules/laravel-jetstream/dist/util/index.js");
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19565,8 +19596,21 @@ var InertiaForm = function () {
         this.processing = false;
         this.successful = false;
         this.recentlySuccessful = false;
+        this.isDirty = false;
 
         this.withData(data).withOptions(options);
+
+        return new Proxy(this, {
+            set: function set(obj, prop, value) {
+                obj[prop] = value;
+
+                if (_util.reservedFieldNames.indexOf(prop) === -1 && value !== obj.initial[prop]) {
+                    obj.isDirty = true;
+                }
+
+                return true;
+            }
+        });
     }
 
     _createClass(InertiaForm, [{
@@ -19590,6 +19634,8 @@ var InertiaForm = function () {
                 this[field] = data[field];
             }
 
+            this.isDirty = false;
+
             return this;
         }
     }, {
@@ -19597,7 +19643,8 @@ var InertiaForm = function () {
         value: function withOptions(options) {
             this.__options = {
                 bag: 'default',
-                resetOnSuccess: true
+                resetOnSuccess: true,
+                setInitialOnSuccess: false
             };
 
             if (options.hasOwnProperty('bag')) {
@@ -19606,6 +19653,10 @@ var InertiaForm = function () {
 
             if (options.hasOwnProperty('resetOnSuccess')) {
                 this.__options.resetOnSuccess = options.resetOnSuccess;
+            }
+
+            if (options.hasOwnProperty('setInitialOnSuccess')) {
+                this.__options.setInitialOnSuccess = options.setInitialOnSuccess;
             }
 
             return this;
@@ -19627,7 +19678,9 @@ var InertiaForm = function () {
     }, {
         key: 'data',
         value: function data() {
-            var data = {};
+            var data = {
+                '_error_bag': this.__options.bag
+            };
 
             for (var property in this.initial) {
                 data[property] = this[property];
@@ -19639,6 +19692,8 @@ var InertiaForm = function () {
         key: 'reset',
         value: function reset() {
             (0, _util.merge)(this, this.initial);
+
+            this.isDirty = false;
         }
     }, {
         key: 'setInitialValues',
@@ -19683,7 +19738,7 @@ var InertiaForm = function () {
             this.processing = true;
             this.successful = false;
 
-            var then = function then() {
+            var onSuccess = function onSuccess(page) {
                 _this.processing = false;
 
                 if (!_this.hasErrors()) {
@@ -19691,13 +19746,17 @@ var InertiaForm = function () {
                 } else {
                     _this.onFail();
                 }
+
+                if (options.onSuccess) {
+                    options.onSuccess(page);
+                }
             };
 
             if (requestType === 'delete') {
-                return this.__inertia[requestType](url, options).then(then);
+                return this.__inertia[requestType](url, _extends({}, options, { onSuccess: onSuccess }));
             }
 
-            return this.__inertia[requestType](url, this.hasFiles() ? (0, _util.objectToFormData)(this.data()) : this.data(), options).then(then);
+            return this.__inertia[requestType](url, this.hasFiles() ? (0, _util.objectToFormData)(this.data()) : this.data(), _extends({}, options, { onSuccess: onSuccess }));
         }
     }, {
         key: 'hasFiles',
@@ -19751,6 +19810,13 @@ var InertiaForm = function () {
 
             if (this.__options.resetOnSuccess) {
                 this.reset();
+            } else if (this.__options.setInitialOnSuccess) {
+                var _data = this.data(),
+                    _error_bag = _data._error_bag,
+                    data = _objectWithoutProperties(_data, ['_error_bag']);
+
+                this.setInitialValues(data);
+                this.isDirty = false;
             }
         }
     }, {
@@ -19765,18 +19831,29 @@ var InertiaForm = function () {
             return this.inertiaPage().errorBags[this.__options.bag] && Object.keys(this.inertiaPage().errorBags[this.__options.bag]).length > 0;
         }
     }, {
+        key: 'hasError',
+        value: function hasError(field) {
+            return this.hasErrors() && this.inertiaPage().errorBags[this.__options.bag][field] && this.inertiaPage().errorBags[this.__options.bag][field].length > 0;
+        }
+    }, {
         key: 'error',
         value: function error(field) {
-            if (!this.hasErrors() || !this.inertiaPage().errorBags[this.__options.bag][field] || this.inertiaPage().errorBags[this.__options.bag][field].length == 0) {
-                return;
+            if (this.hasError(field)) {
+                return this.inertiaPage().errorBags[this.__options.bag][field][0];
             }
-
-            return this.inertiaPage().errorBags[this.__options.bag][field][0];
         }
     }, {
         key: 'errors',
-        value: function errors(field) {
-            return this.error(field) ? this.inertiaPage().errorBags[this.__options.bag][field] : [];
+        value: function errors() {
+            var field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            if (field === null) {
+                return this.hasErrors() ? Object.values(this.inertiaPage().errorBags[this.__options.bag]).reduce(function (a, b) {
+                    return a.concat(b);
+                }, []) : [];
+            }
+
+            return this.hasError(field) ? this.inertiaPage().errorBags[this.__options.bag][field] : [];
         }
     }, {
         key: 'inertiaPage',
@@ -19804,16 +19881,38 @@ var InertiaForm = function () {
     return InertiaForm;
 }();
 
-exports.default = {
-    install: function install(Vue) {
-        Vue.prototype.$inertia.form = function () {
-            var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function useForm(data, options) {
+    var adapter = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
-            return InertiaForm.create().withData(data).withOptions(options).withInertia(Vue.prototype.$inertia).withPage(function () {
-                return Vue.prototype.$page;
+    if (!adapter || !_vue.shallowReactive) throw Error('The useForm hook may only be used with Vue 3 and @inertiajs/inertia-vue3.');
+
+    return (0, _vue.shallowReactive)(InertiaForm.create().withData(data).withOptions(options).withInertia(_inertia.Inertia).withPage(function () {
+        return adapter.usePage().props.value;
+    }));
+}
+
+exports.default = {
+    install: function install(app) {
+        if (app.version.split('.')[0] == 3) {
+            Object.defineProperty(app.config.globalProperties.$inertia, 'form', {
+                value: function value() {
+                    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+                    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+                    return InertiaForm.create().withData(data).withOptions(options).withInertia(app.config.globalProperties.$inertia).withPage(function () {
+                        return app.config.globalProperties.$page.hasOwnProperty('props') ? app.config.globalProperties.$page.props : app.config.globalProperties.$page;
+                    });
+                }
             });
-        };
+        } else {
+            app.prototype.$inertia.form = function () {
+                var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+                var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+                return InertiaForm.create().withData(data).withOptions(options).withInertia(app.prototype.$inertia).withPage(function () {
+                    return app.prototype.$page.hasOwnProperty('props') ? app.prototype.$page.props : app.prototype.$page;
+                });
+            };
+        }
     }
 };
 
@@ -19841,6 +19940,12 @@ Object.defineProperty(exports, 'InertiaForm', {
     return _interopRequireDefault(_InertiaForm).default;
   }
 });
+Object.defineProperty(exports, 'useForm', {
+  enumerable: true,
+  get: function get() {
+    return _InertiaForm.useForm;
+  }
+});
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19860,7 +19965,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.guardAgainstReservedFieldName = guardAgainstReservedFieldName;
-var reservedFieldNames = exports.reservedFieldNames = ['__options', '__inertia', '__page', '__validateRequestType', 'data', 'delete', 'errorFor', 'errorsFor', 'hasErrors', 'initial', 'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put', 'reset', 'submit', 'successful', 'withData', 'withOptions'];
+var reservedFieldNames = exports.reservedFieldNames = ['__options', '__inertia', '__page', '__validateRequestType', 'data', 'delete', 'errorFor', 'errorsFor', 'hasErrors', 'initial', 'isDirty', 'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put', 'recentlySuccessful', 'reset', 'submit', 'successful', 'withData', 'withOptions'];
 
 function guardAgainstReservedFieldName(fieldName) {
     if (reservedFieldNames.indexOf(fieldName) !== -1) {
