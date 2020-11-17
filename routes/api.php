@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/notes', 'NoteController@getAllNotes')->middleware(HandleCors::class);
-Route::get('/note/0', 'NoteController@getLatestUpdatedNote')->middleware(HandleCors::class);
-Route::get('/note/{id}', 'NoteController@getNote')->middleware(HandleCors::class);
-Route::post('/note/create', 'NoteController@createNote')->middleware(HandleCors::class);
-Route::post('/note/update/{id}', 'NoteController@updateNote')->middleware(HandleCors::class);
-Route::post('/note/delete/{id}', 'NoteController@deleteNote')->middleware(HandleCors::class);
+Route::get('/notes', 'NoteController@getAllNotes');
+Route::get('/note/0', 'NoteController@getLatestUpdatedNote');
+Route::get('/note/{id}', 'NoteController@getNote');
+Route::post('/note/create', 'NoteController@createNote');
+Route::post('/note/update/{id}', 'NoteController@updateNote');
+Route::post('/note/delete/{id}', 'NoteController@deleteNote');
