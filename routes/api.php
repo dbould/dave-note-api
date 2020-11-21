@@ -1,8 +1,5 @@
 <?php
 
-use Fruitcake\Cors\HandleCors;
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

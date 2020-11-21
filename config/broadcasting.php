@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Broadcaster
@@ -41,6 +40,11 @@ return [
             ],
         ],
 
+        'ably' => [
+            'driver' => 'ably',
+            'key' => env('ABLY_KEY'),
+        ],
+
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
@@ -53,7 +57,5 @@ return [
         'null' => [
             'driver' => 'null',
         ],
-
     ],
-
 ];

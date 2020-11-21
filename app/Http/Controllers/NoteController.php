@@ -1,31 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use App\Note;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    public function test()
-    {
-        die('CLUCK');
-        return 'mooooo';
-    }
-
     public function getAllNotes(Request $request)
     {
-        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get();
+        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->get()->toJson();
     }
 
     public function getLatestUpdatedNote()
     {
-        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->firstOrFail();
+        return Note::where('is_deleted', '=', '0')->orderBy('updated_at', 'desc')->firstOrFail()->toJson();
     }
 
     public function getNote($id)
     {
-        return Note::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail();
+        return Note::where('id', '=', $id)->where('is_deleted', '=', '0')->firstOrFail()->toJson();
     }
 
     public function createNote(Request $request)
